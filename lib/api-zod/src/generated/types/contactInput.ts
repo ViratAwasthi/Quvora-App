@@ -5,9 +5,6 @@
  * Quvora Consulting API
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface ContactInput {
   fullName: string;
@@ -24,13 +21,3 @@ export interface ContactInput {
   message?: string | null;
   agreed: boolean;
 }
-
-export interface ContactResult {
-  success: boolean;
-  message: string;
-}
-
-export interface ErrorResponse {
-  error: string;
-}
-
