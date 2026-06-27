@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronUp, MessageCircle } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function FloatingButtons() {
@@ -9,7 +9,7 @@ export default function FloatingButtons() {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -18,32 +18,20 @@ export default function FloatingButtons() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 right-6 z-50 flex justify-between pointer-events-none">
-      {/* WhatsApp */}
-      <motion.a
-        href="https://wa.me/910000000000"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1EBE5D] transition-colors pointer-events-auto"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <MessageCircle size={28} />
-      </motion.a>
-
-      {/* Scroll to Top */}
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.5, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 10 }}
             onClick={scrollToTop}
-            className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors pointer-events-auto ml-auto"
+            className="w-12 h-12 bg-[#0A2A5E] hover:bg-[#C89B3C] text-white rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 pointer-events-auto"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label="Back to top"
           >
-            <ChevronUp size={24} />
+            <ChevronUp size={22} />
           </motion.button>
         )}
       </AnimatePresence>

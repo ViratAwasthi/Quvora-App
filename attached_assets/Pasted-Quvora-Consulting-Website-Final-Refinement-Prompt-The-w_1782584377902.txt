@@ -1,0 +1,78 @@
+Quvora Consulting Website – Final Refinement Prompt
+
+The website structure is already good. Do not add unnecessary sections. Instead, make the website feel more premium, interactive, and modern through better design, animations, and improved user experience.
+
+Remove & Replace
+
+- Remove What Our Clients Say completely.
+- Replace it with Success Stories, featuring 3 professional case studies (not testimonials). Each card should open a modal with more details.
+- Remove Careers / Join Us and replace it with Why Partner With Quvora, highlighting long-term HR partnership benefits.
+- Remove Insights & Perspectives / Blog and replace it with Latest HR Trends, showing 3–4 professional HR insight cards (no blog page required).
+
+Improve Existing Sections
+
+- Upgrade the Who We Are section by replacing the placeholder illustration with a premium HR/business illustration or subtle animated SVG.
+- Enhance Our Services cards with better icons, cleaner spacing, and smooth hover animations. Remove the "Learn More" links and instead reveal a short description on hover.
+- Improve the Recruitment Process by animating the connecting line and highlighting each step as users scroll.
+- Enhance Industries We Serve by adding a one-line description inside each card and a gentle hover animation instead of plain static cards.
+- Improve Our Impact with animated counters and subtle chart/graph animations behind the numbers.
+
+Trusted Organizations
+
+Replace the current "Leading Companies" heading with:
+
+Talent Experience Across Leading Organizations
+
+Display logos in grayscale that become colored on hover.
+
+Include:
+
+- Tata AIA
+- Logitech
+- PwC
+- MakeMyTrip
+- EY
+- Walmart
+- Myntra
+- Roche
+- Sun Pharmaceutical Industries
+- Sanofi
+
+Only display these if Quvora is authorized to reference them; otherwise, use generic placeholder logos or a different heading.
+
+Contact Section
+
+- Remove the Google Map.
+- Remove the phone number.
+- Remove WhatsApp and all social media links.
+- Keep only:
+  - Contact Form
+  - Email: connect@quvoraconsulting.com
+  - Office Address:
+    300/1, Kohinoor Business Park, Amar Nagar, Nav Pada, Kurla West, Mumbai, Maharashtra 400070
+- Make the contact form fully functional so all inquiries are sent directly to connect@quvoraconsulting.com.
+
+Add More Interactivity
+
+Without changing the overall layout, add:
+
+- Smooth scroll animations
+- Fade-in effects for every section
+- Hover lift effects for cards
+- Button ripple animations
+- Animated counters
+- Sticky navbar with blur effect
+- Active navigation highlighting
+- Back-to-top button
+- Loading animation
+- Smooth page transitions
+- Floating background particles in the hero section
+- Subtle parallax movement
+- Gentle floating decorative shapes
+- Mouse hover glow on buttons
+- Image zoom on hover
+- Soft shadows and premium micro-interactions throughout the website
+
+Overall Goal
+
+Do not increase the number of sections unnecessarily. Focus on making the existing website feel like a premium international HR consulting website through better visuals, refined typography, smoother animations, improved spacing, and polished interactions while keeping the design clean, professional, and lightweight.

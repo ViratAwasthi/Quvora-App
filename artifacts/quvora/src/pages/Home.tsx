@@ -7,11 +7,11 @@ import Process from "@/components/sections/Process";
 import Industries from "@/components/sections/Industries";
 import TrustUs from "@/components/sections/TrustUs";
 import Impact from "@/components/sections/Impact";
-import Testimonials from "@/components/sections/Testimonials";
+import SuccessStories from "@/components/sections/SuccessStories";
 import ClientLogos from "@/components/sections/ClientLogos";
-import Careers from "@/components/sections/Careers";
+import WhyPartner from "@/components/sections/WhyPartner";
 import FAQ from "@/components/sections/FAQ";
-import Blog from "@/components/sections/Blog";
+import HRTrends from "@/components/sections/HRTrends";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
@@ -31,11 +31,11 @@ export default function Home() {
         <Industries />
         <TrustUs />
         <Impact />
-        <Testimonials />
+        <SuccessStories />
         <ClientLogos />
-        <Careers />
+        <WhyPartner />
         <FAQ />
-        <Blog />
+        <HRTrends />
         <CTA />
         <Contact />
       </main>
