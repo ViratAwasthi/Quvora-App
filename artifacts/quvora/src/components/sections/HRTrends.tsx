@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock, ArrowUpRight, X, BookOpen } from "lucide-react";
+import { Clock, ArrowUpRight, X, BookOpen, Brain, GraduationCap, BarChart3, Heart } from "lucide-react";
 
 const trends = [
   {
@@ -8,7 +8,44 @@ const trends = [
     readTime: "5 min read",
     title: "AI-Augmented Hiring: Where Human Judgment Meets Machine Intelligence",
     excerpt: "AI tools now handle screening and scheduling — but the best hiring decisions still depend on human intuition. Here's how leading CHROs are blending both.",
-    gradient: "from-[#0A2A5E] to-[#1a4070]",
+    accentColor: "#C89B3C",
+    bgFrom: "#0A2A5E",
+    bgTo: "#1a4070",
+    Icon: Brain,
+    stat: "40%",
+    statLabel: "Faster Screening",
+    illustration: (
+      <svg viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        {/* Circuit board background */}
+        <line x1="0" y1="40" x2="260" y2="40" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        <line x1="0" y1="80" x2="260" y2="80" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        <line x1="0" y1="120" x2="260" y2="120" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        <line x1="60" y1="0" x2="60" y2="140" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        <line x1="130" y1="0" x2="130" y2="140" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        <line x1="200" y1="0" x2="200" y2="140" stroke="white" strokeOpacity="0.06" strokeWidth="1"/>
+        {/* AI brain outline */}
+        <ellipse cx="130" cy="65" rx="38" ry="34" stroke="#C89B3C" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="4 3"/>
+        <circle cx="130" cy="65" r="22" fill="#C89B3C" fillOpacity="0.12" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1.5"/>
+        {/* Neural lines */}
+        {[[130,65,88,30],[130,65,172,30],[130,65,80,90],[130,65,180,90],[130,65,105,108],[130,65,155,108]].map(([x1,y1,x2,y2],i)=>(
+          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#C89B3C" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 3"/>
+        ))}
+        {/* Nodes */}
+        {[[88,30],[172,30],[80,90],[180,90],[105,108],[155,108]].map(([cx,cy],i)=>(
+          <circle key={i} cx={cx} cy={cy} r="5" fill="#C89B3C" fillOpacity="0.5"/>
+        ))}
+        {/* Center icon */}
+        <text x="130" y="70" textAnchor="middle" fontSize="16" fill="#C89B3C" opacity="0.9">🧠</text>
+        {/* Stat card */}
+        <rect x="6" y="6" width="58" height="36" rx="6" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+        <text x="35" y="22" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#C89B3C">40%</text>
+        <text x="35" y="35" textAnchor="middle" fontSize="7" fill="white" opacity="0.5">Faster Screen</text>
+        {/* Right stat card */}
+        <rect x="196" y="6" width="58" height="36" rx="6" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+        <text x="225" y="22" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#C89B3C">98%</text>
+        <text x="225" y="35" textAnchor="middle" fontSize="7" fill="white" opacity="0.5">Match Acc.</text>
+      </svg>
+    ),
     full: `Artificial intelligence has irrevocably changed how organisations source, screen, and shortlist talent. Automated resume parsing, predictive candidate scoring, and AI-driven interview scheduling have compressed what once took weeks into hours.
 
 Yet the most sophisticated HR leaders know that AI is a force-multiplier, not a replacement. The nuanced judgment required to assess cultural fit, leadership potential, and long-term trajectory remains deeply human.
@@ -32,7 +69,40 @@ The organisations winning the talent war in 2026 aren't choosing between AI and 
     readTime: "4 min read",
     title: "The Skills-First Hiring Revolution and What It Means for Your Organisation",
     excerpt: "Traditional degree-based filters are giving way to skills assessments and portfolio evidence. Discover how global companies are rebuilding their hiring criteria.",
-    gradient: "from-[#0A2A5E] to-[#0f3060]",
+    accentColor: "#C89B3C",
+    bgFrom: "#0A2A5E",
+    bgTo: "#0f3060",
+    Icon: GraduationCap,
+    stat: "3–5×",
+    statLabel: "Larger Talent Pool",
+    illustration: (
+      <svg viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        {/* Skill badges floating */}
+        <rect x="20" y="15" width="68" height="26" rx="13" fill="white" fillOpacity="0.1" stroke="white" strokeOpacity="0.2" strokeWidth="1"/>
+        <text x="54" y="32" textAnchor="middle" fontSize="10" fill="white" opacity="0.8" fontWeight="600">✦ Leadership</text>
+        <rect x="100" y="8" width="60" height="26" rx="13" fill="#C89B3C" fillOpacity="0.2" stroke="#C89B3C" strokeOpacity="0.5" strokeWidth="1"/>
+        <text x="130" y="25" textAnchor="middle" fontSize="10" fill="#C89B3C" fontWeight="700">★ Strategy</text>
+        <rect x="172" y="18" width="72" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+        <text x="208" y="35" textAnchor="middle" fontSize="10" fill="white" opacity="0.7" fontWeight="600">Analytics</text>
+        {/* Second row */}
+        <rect x="8" y="57" width="56" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+        <text x="36" y="74" textAnchor="middle" fontSize="10" fill="white" opacity="0.7">Finance</text>
+        <rect x="76" y="52" width="74" height="28" rx="14" fill="#C89B3C" fillOpacity="0.15" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1.5"/>
+        <text x="113" y="70" textAnchor="middle" fontSize="11" fill="#C89B3C" fontWeight="800">✦ HR Mastery</text>
+        <rect x="162" y="56" width="66" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.12" strokeWidth="1"/>
+        <text x="195" y="73" textAnchor="middle" fontSize="10" fill="white" opacity="0.6">Product Mgmt</text>
+        {/* Third row */}
+        <rect x="30" y="98" width="60" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.12" strokeWidth="1"/>
+        <text x="60" y="115" textAnchor="middle" fontSize="10" fill="white" opacity="0.6">DevOps</text>
+        <rect x="105" y="100" width="52" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+        <text x="131" y="117" textAnchor="middle" fontSize="10" fill="white" opacity="0.7">Design</text>
+        <rect x="168" y="97" width="68" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.12" strokeWidth="1"/>
+        <text x="202" y="114" textAnchor="middle" fontSize="10" fill="white" opacity="0.6">Sales Ops</text>
+        {/* Pool size label */}
+        <rect x="6" y="6" width="48" height="24" rx="4" fill="#C89B3C" fillOpacity="0.9"/>
+        <text x="30" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="white">3–5×</text>
+      </svg>
+    ),
     full: `For decades, a degree from a recognised institution was the primary filter at the top of the hiring funnel. That paradigm is cracking — rapidly.
 
 IBM, Google, and Accenture have publicly removed degree requirements for a majority of roles. In India, Infosys and Wipro have expanded their "skills-based hiring" programmes to include non-traditional candidates, with measurable improvements in retention and performance.
@@ -56,7 +126,46 @@ The question is no longer whether to shift to skills-first hiring — it's how f
     readTime: "6 min read",
     title: "From Transactional to Strategic: The CHRO's Evolving Mandate in 2026",
     excerpt: "Chief Human Resources Officers are now boardroom fixtures. We unpack the expanded mandate — from workforce analytics to ESG reporting and culture metrics.",
-    gradient: "from-[#0A2A5E] to-[#132d60]",
+    accentColor: "#C89B3C",
+    bgFrom: "#0A2A5E",
+    bgTo: "#132d60",
+    Icon: BarChart3,
+    stat: "62%",
+    statLabel: "CHROs in C-Suite",
+    illustration: (
+      <svg viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        {/* Org chart top */}
+        <rect x="100" y="8" width="60" height="28" rx="6" fill="#C89B3C" fillOpacity="0.9"/>
+        <text x="130" y="26" textAnchor="middle" fontSize="9" fontWeight="800" fill="white">CHRO</text>
+        {/* Connect lines */}
+        <line x1="130" y1="36" x2="130" y2="52" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1.5"/>
+        <line x1="60" y1="52" x2="200" y2="52" stroke="#C89B3C" strokeOpacity="0.3" strokeWidth="1.5"/>
+        <line x1="60" y1="52" x2="60" y2="62" stroke="#C89B3C" strokeOpacity="0.3" strokeWidth="1.5"/>
+        <line x1="130" y1="52" x2="130" y2="62" stroke="#C89B3C" strokeOpacity="0.3" strokeWidth="1.5"/>
+        <line x1="200" y1="52" x2="200" y2="62" stroke="#C89B3C" strokeOpacity="0.3" strokeWidth="1.5"/>
+        {/* Level 2 boxes */}
+        {[["Talent Acq", 60], ["L&D", 130], ["HR Ops", 200]].map(([label, cx], i) => (
+          <g key={i}>
+            <rect x={(cx as number)-30} y={62} width={60} height={24} rx="5" fill="white" fillOpacity="0.1" stroke="white" strokeOpacity="0.2" strokeWidth="1"/>
+            <text x={cx} y={78} textAnchor="middle" fontSize="8" fill="white" opacity="0.85" fontWeight="600">{label as string}</text>
+          </g>
+        ))}
+        {/* L3 */}
+        <line x1="60" y1="86" x2="60" y2="96" stroke="white" strokeOpacity="0.2" strokeWidth="1"/>
+        <line x1="130" y1="86" x2="130" y2="96" stroke="white" strokeOpacity="0.2" strokeWidth="1"/>
+        <line x1="200" y1="86" x2="200" y2="96" stroke="white" strokeOpacity="0.2" strokeWidth="1"/>
+        {[60,130,200].map((cx,i)=>(
+          <g key={i}>
+            <circle cx={cx} cy={103} r="8" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+            <circle cx={cx-14} cy={103} r="8" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+            <circle cx={cx+14} cy={103} r="8" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
+          </g>
+        ))}
+        {/* Boardroom stat */}
+        <rect x="196" y="110" width="58" height="24" rx="5" fill="#C89B3C" fillOpacity="0.2" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1"/>
+        <text x="225" y="126" textAnchor="middle" fontSize="10" fontWeight="800" fill="#C89B3C">62% ↑</text>
+      </svg>
+    ),
     full: `A decade ago, the Chief Human Resources Officer was primarily an administrator — managing payroll, resolving conflicts, running compliance. That role is unrecognisable today.
 
 In 2026, the CHRO sits at the intersection of strategy, technology, culture, and risk. Boards now expect CHROs to speak fluently about workforce ROI, talent pipeline health, DEI outcomes, ESG disclosures, and the people implications of M&A.
@@ -86,7 +195,40 @@ The CHRO of 2026 is not a support function. They are a growth driver.`,
     readTime: "3 min read",
     title: "Why Retention Is the New Recruitment — and How to Win at Both",
     excerpt: "With talent scarcity at a decade high, the cost of turnover has never been greater. Explore the evidence-backed strategies that keep high performers engaged.",
-    gradient: "from-[#0A2A5E] to-[#0d3575]",
+    accentColor: "#C89B3C",
+    bgFrom: "#0A2A5E",
+    bgTo: "#0d3575",
+    Icon: Heart,
+    stat: "60%",
+    statLabel: "Turnover Reduction",
+    illustration: (
+      <svg viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        {/* People figures */}
+        {[40, 80, 120, 160, 200, 240].map((cx, i) => (
+          <g key={i} opacity={i < 4 ? 1 : 0.35}>
+            <circle cx={cx} cy={55} r={i === 0 ? 14 : 11} fill={i===0?"#C89B3C":i<4?"white":"white"} fillOpacity={i===0?0.9:0.12} stroke={i===0?"#C89B3C":"white"} strokeOpacity={i<4?0.3:0.1} strokeWidth="1.5"/>
+            <text x={cx} y={60} textAnchor="middle" fontSize="14" opacity={i<4?0.8:0.2}>{["👑","👤","👤","👤","👤","👤"][i]}</text>
+            <rect x={cx-16} y={72} width={32} height={20} rx="4" fill={i===0?"#C89B3C":"white"} fillOpacity={i===0?0.2:0.06} stroke={i<4?"white":"white"} strokeOpacity={i<4?0.2:0.05} strokeWidth="1"/>
+            <text x={cx} y={85} textAnchor="middle" fontSize="7" fill="white" opacity={i<4?0.7:0.2}>{["Leader","Sr. Eng","Analyst","Mgr","Exec","Dir"][i]}</text>
+          </g>
+        ))}
+        {/* Retention rate chart */}
+        <rect x="6" y="100" width="248" height="34" rx="6" fill="white" fillOpacity="0.05" stroke="white" strokeOpacity="0.1" strokeWidth="1"/>
+        <text x="16" y="114" fontSize="8" fill="white" opacity="0.5">Attrition Rate</text>
+        {/* Before bar */}
+        <rect x="16" y="118" width="90" height="8" rx="4" fill="white" fillOpacity="0.08"/>
+        <rect x="16" y="118" width="90" height="8" rx="4" fill="#ef4444" fillOpacity="0.7"/>
+        <text x="110" y="126" fontSize="7" fill="white" opacity="0.5">42%</text>
+        {/* After bar */}
+        <rect x="130" y="118" width="38" height="8" rx="4" fill="#C89B3C" fillOpacity="0.8"/>
+        <rect x="130" y="118" width="90" height="8" rx="4" fill="white" fillOpacity="0.04"/>
+        <text x="224" y="126" fontSize="7" fill="#C89B3C" fontWeight="700">18% ↓</text>
+        {/* Growth arrow */}
+        <text x="8" y="40" fontSize="9" fill="#C89B3C" opacity="0.8" fontWeight="700">Retention</text>
+        <path d="M 6 30 Q 40 10 80 18 Q 120 28 160 14 Q 200 4 245 8" stroke="#C89B3C" strokeWidth="2" fill="none" strokeOpacity="0.5"/>
+        <circle cx="245" cy="8" r="3" fill="#C89B3C" fillOpacity="0.8"/>
+      </svg>
+    ),
     full: `The cost of replacing a mid-level employee is estimated at 50–150% of their annual salary, when you factor in recruiting fees, onboarding time, lost productivity, and knowledge drain. For senior hires, that figure routinely exceeds 200%.
 
 Yet most organisations spend 10x more on acquiring talent than retaining it.
@@ -119,10 +261,7 @@ function Modal({ trend, onClose }: { trend: typeof trends[0]; onClose: () => voi
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
+      <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <motion.div
         className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto z-10"
         initial={{ opacity: 0, scale: 0.93, y: 24 }}
@@ -130,60 +269,42 @@ function Modal({ trend, onClose }: { trend: typeof trends[0]; onClose: () => voi
         exit={{ opacity: 0, scale: 0.93, y: 24 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
       >
-        {/* Header */}
-        <div className={`bg-gradient-to-br ${trend.gradient} text-white p-8 rounded-t-2xl relative overflow-hidden`}>
-          <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5" />
-          <div className="absolute right-16 bottom-0 w-16 h-16 rounded-full bg-[#C89B3C]/15" />
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-          >
+        <div
+          className="text-white p-8 rounded-t-2xl relative overflow-hidden"
+          style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
+        >
+          <div className="absolute inset-0 opacity-20">
+            {trend.illustration}
+          </div>
+          <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors z-10">
             <X size={15} />
           </button>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20">{trend.tag}</span>
-            <span className="flex items-center gap-1 text-white/50 text-xs">
-              <Clock size={11} /> {trend.readTime}
-            </span>
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20">{trend.tag}</span>
+              <span className="flex items-center gap-1 text-white/50 text-xs"><Clock size={11} /> {trend.readTime}</span>
+            </div>
+            <h2 className="text-xl font-bold leading-snug pr-8">{trend.title}</h2>
           </div>
-          <h2 className="text-xl font-bold leading-snug pr-8">{trend.title}</h2>
         </div>
-
-        {/* Body */}
         <div className="p-8">
           <div className="prose prose-sm max-w-none text-muted-foreground leading-relaxed space-y-4">
             {trend.full.split("\n\n").map((para, i) => {
               if (para.startsWith("**") && para.endsWith("**")) {
-                return (
-                  <h3 key={i} className="text-base font-bold text-primary mt-6 mb-2">
-                    {para.replace(/\*\*/g, "")}
-                  </h3>
-                );
+                return <h3 key={i} className="text-base font-bold text-primary mt-6 mb-2">{para.replace(/\*\*/g, "")}</h3>;
               }
               if (para.startsWith("*") && para.includes("*:")) {
                 const [label, ...rest] = para.split("*:");
-                return (
-                  <p key={i}>
-                    <strong className="text-primary">{label.replace(/\*/g, "")}:</strong>
-                    {rest.join("")}
-                  </p>
-                );
+                return <p key={i}><strong className="text-primary">{label.replace(/\*/g, "")}:</strong>{rest.join("")}</p>;
               }
               return <p key={i}>{para}</p>;
             })}
           </div>
-
           <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <BookOpen size={13} />
-              <span>Quvora HR Intelligence Series</span>
+              <BookOpen size={13} /><span>Quvora HR Intelligence Series</span>
             </div>
-            <button
-              onClick={onClose}
-              className="text-sm text-primary hover:text-[#C89B3C] font-medium transition-colors"
-            >
-              Close
-            </button>
+            <button onClick={onClose} className="text-sm text-primary hover:text-[#C89B3C] font-medium transition-colors">Close</button>
           </div>
         </div>
       </motion.div>
@@ -209,7 +330,7 @@ export default function HRTrends() {
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-primary inline-block relative">
             Latest HR Trends
-            <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#C89B3C]" />
+            <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#C89B3C] rounded-full" />
           </h2>
           <p className="mt-8 text-muted-foreground max-w-xl mx-auto">
             Perspectives and insights from Quvora's consulting team — keeping your people strategy ahead of the curve.
@@ -220,46 +341,46 @@ export default function HRTrends() {
           {trends.map((trend, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 2) * 0.12 }}
-              whileHover={{ y: -5 }}
-              className="group rounded-2xl overflow-hidden border border-border/60 shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col cursor-pointer"
+              transition={{ duration: 0.55, delay: (index % 2) * 0.14 }}
+              whileHover={{ y: -6 }}
+              className="group rounded-2xl overflow-hidden border border-border/50 shadow-sm hover:shadow-2xl transition-all duration-400 bg-white flex flex-col cursor-pointer"
               onClick={() => setActiveTrend(trend)}
             >
-              {/* Visual header */}
-              <div className={`bg-gradient-to-br ${trend.gradient} h-44 relative overflow-hidden flex items-end p-6`}>
-                {/* Subtle grid pattern */}
-                <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <pattern id={`grid-${index}`} width="32" height="32" patternUnits="userSpaceOnUse">
-                      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" strokeWidth="0.5"/>
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill={`url(#grid-${index})`} />
-                </svg>
+              {/* Visual header with illustration */}
+              <div
+                className="h-48 relative overflow-hidden flex items-end"
+                style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
+              >
+                {/* Illustration fills the header */}
+                <div className="absolute inset-0 p-4">
+                  {trend.illustration}
+                </div>
 
-                {/* Decorative orb */}
+                {/* Hover shimmer */}
                 <motion.div
-                  animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.7 }}
-                  className="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-[#C89B3C]/30"
-                />
-                <motion.div
-                  animate={{ scale: [1, 1.12, 1] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
-                  className="absolute right-8 bottom-4 w-16 h-16 rounded-full bg-white/5"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full"
+                  transition={{ duration: 0.6 }}
                 />
 
+                {/* Tag badge */}
                 <div className="absolute top-4 left-5 z-10">
-                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm border border-white/15">
+                    <trend.Icon size={10} />
                     {trend.tag}
                   </span>
                 </div>
 
-                {/* Big quote mark */}
-                <div className="absolute bottom-3 right-5 text-white/10 font-serif text-8xl leading-none select-none">"</div>
+                {/* Stat badge top-right */}
+                <div className="absolute top-4 right-5 z-10 bg-[#C89B3C] rounded-lg px-3 py-1.5 shadow-lg">
+                  <div className="text-white font-black text-base leading-none">{trend.stat}</div>
+                  <div className="text-white/70 text-[9px] leading-tight">{trend.statLabel}</div>
+                </div>
+
+                {/* Bottom gradient overlay */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent z-10" />
               </div>
 
               <div className="p-7 flex flex-col flex-grow">
@@ -273,7 +394,7 @@ export default function HRTrends() {
                 <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
                   {trend.excerpt}
                 </p>
-                <div className="mt-5 flex items-center gap-1.5 text-[#C89B3C] font-semibold text-sm group-hover:gap-2.5 transition-all duration-200">
+                <div className="mt-5 flex items-center gap-1.5 text-[#C89B3C] font-semibold text-sm group-hover:gap-3 transition-all duration-200">
                   Read Full Insight <ArrowUpRight size={15} />
                 </div>
               </div>
