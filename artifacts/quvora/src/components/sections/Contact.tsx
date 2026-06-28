@@ -115,7 +115,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold text-primary text-sm mb-1">Office Address</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    300/1, Kohinoor Business Park,<br />
+                    Kohinoor Business Park,<br />
                     Amar Nagar, Nav Pada,<br />
                     Kurla West, Mumbai,<br />
                     Maharashtra 400070
