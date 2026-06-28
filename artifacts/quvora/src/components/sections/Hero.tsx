@@ -1,6 +1,6 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, Briefcase } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
 const stats = [
@@ -10,142 +10,247 @@ const stats = [
   { value: "10+", label: "Industries Served" },
 ];
 
-const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
   id: i,
-  x: `${8 + ((i * 13) % 84)}%`,
-  y: `${10 + ((i * 17) % 78)}%`,
-  size: 2 + (i % 3),
+  x: `${5 + ((i * 13) % 90)}%`,
+  y: `${5 + ((i * 17) % 88)}%`,
+  size: 1.5 + (i % 3),
   duration: 3 + (i % 5),
-  delay: i * 0.35,
+  delay: i * 0.3,
 }));
+
+const candidates = [
+  { name: "Priya Sharma", role: "VP – Human Resources", exp: "12 yrs", match: 97, status: "Interview", avatar: "PS" },
+  { name: "Arjun Mehta", role: "Chief Financial Officer", exp: "15 yrs", match: 94, status: "Offered", avatar: "AM" },
+  { name: "Riya Bose", role: "Head of Engineering", exp: "10 yrs", match: 91, status: "Screening", avatar: "RB" },
+];
+
+const pipeline = [
+  { label: "Applications", count: 148, color: "#C89B3C", pct: 100 },
+  { label: "Screened", count: 62, color: "#0d7cf2", pct: 42 },
+  { label: "Interviewed", count: 24, color: "#10b981", pct: 16 },
+  { label: "Shortlisted", count: 9, color: "#8b5cf6", pct: 6 },
+  { label: "Placed", count: 4, color: "#C89B3C", pct: 3 },
+];
+
+const bars = [38, 55, 48, 70, 62, 88, 74];
+
+const statusColor: Record<string, string> = {
+  Interview: "bg-blue-500/20 text-blue-300",
+  Offered: "bg-emerald-500/20 text-emerald-300",
+  Screening: "bg-amber-500/20 text-amber-300",
+};
 
 function AnimatedDashboard() {
   const [tick, setTick] = useState(0);
+  const [activeCandidate, setActiveCandidate] = useState(0);
+
   useEffect(() => {
-    const t = setInterval(() => setTick((n) => n + 1), 2200);
+    const t = setInterval(() => {
+      setTick(n => n + 1);
+      setActiveCandidate(n => (n + 1) % candidates.length);
+    }, 2800);
     return () => clearInterval(t);
   }, []);
 
-  const bars = [38, 62, 48, 84, 56, 91, 74];
-
   return (
-    <div className="absolute inset-0 rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm shadow-2xl overflow-hidden p-5 flex flex-col justify-between">
+    <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl" style={{ perspective: "1000px" }}>
+      {/* Glassmorphism background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0A2A5E]/95 via-[#0d3272]/90 to-[#122d6a]/95 backdrop-blur-md border border-white/12" />
 
-      {/* Top: Talent Match Card */}
-      <motion.div
-        animate={{ y: [0, -7, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        className="self-end bg-[#0A2A5E]/90 border border-white/20 rounded-xl p-4 w-48 shadow-xl"
-      >
-        <div className="text-[10px] text-white/50 uppercase tracking-widest mb-2">Talent Match</div>
-        <div className="flex items-center gap-2">
-          <div className="w-11 h-11 rounded-full border-2 border-[#C89B3C] flex items-center justify-center text-[#C89B3C] font-black text-sm shrink-0 relative">
-            <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 44 44">
-              <circle cx="22" cy="22" r="19" fill="none" stroke="rgba(200,155,60,0.2)" strokeWidth="2.5" />
-              <motion.circle
-                cx="22" cy="22" r="19"
-                fill="none" stroke="#C89B3C" strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeDasharray="119.4"
-                initial={{ strokeDashoffset: 119.4 }}
-                animate={{ strokeDashoffset: 119.4 * 0.02 }}
-                transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-              />
-            </svg>
-            98%
+      {/* Subtle inner grid */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dash-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+            <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" strokeWidth="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#dash-grid)" />
+      </svg>
+
+      <div className="relative z-10 h-full flex flex-col p-4 gap-3">
+        {/* Header bar */}
+        <div className="flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-[#C89B3C] flex items-center justify-center">
+              <span className="text-white font-black text-[10px]">Q</span>
+            </div>
+            <span className="text-white/80 text-xs font-semibold tracking-wide">Quvora HR Suite</span>
           </div>
-          <div className="flex flex-col gap-1.5 flex-1">
-            <motion.div animate={{ width: ["60%", "80%", "60%"] }} transition={{ duration: 3, repeat: Infinity }} className="h-1.5 bg-[#C89B3C]/70 rounded-full" />
-            <div className="w-3/4 h-1.5 bg-white/25 rounded-full" />
-            <div className="w-1/2 h-1.5 bg-white/15 rounded-full" />
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-white/40 text-[10px]">Live</span>
           </div>
         </div>
-      </motion.div>
 
-      {/* Center: Candidate selection */}
-      <div className="flex justify-center items-center relative py-2">
-        <div className="absolute w-4/5 h-px bg-white/12" />
-        <div className="flex gap-5 relative z-10">
-          {[
-            { big: false, active: false, label: "A" },
-            { big: true, active: true, label: "★" },
-            { big: false, active: false, label: "B" },
-          ].map((c, i) => (
-            <motion.div
-              key={i}
-              animate={{ y: [0, c.big ? -9 : -5, 0] }}
-              transition={{ duration: 3.2, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
-              className={`${c.big ? "w-16 h-16" : "w-11 h-11"} rounded-full flex items-center justify-center shadow-lg font-bold transition-all duration-500 ${c.active ? "border-[3px] border-[#C89B3C] bg-[#C89B3C]/20 text-[#C89B3C] text-lg" : "border-2 border-white/25 bg-white/10 text-white/50 text-sm"}`}
-            >
-              {c.label}
-            </motion.div>
-          ))}
+        {/* Main content: 2 columns */}
+        <div className="flex gap-3 flex-1 min-h-0">
+          {/* Left: Candidates */}
+          <div className="flex flex-col gap-2 w-[52%]">
+            <div className="text-[9px] text-white/35 uppercase tracking-widest font-semibold flex items-center gap-1">
+              <Users className="w-2.5 h-2.5" /> Active Candidates
+            </div>
+            <div className="flex flex-col gap-1.5 flex-1">
+              {candidates.map((c, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    borderColor: i === activeCandidate ? "rgba(200,155,60,0.5)" : "rgba(255,255,255,0.08)",
+                    backgroundColor: i === activeCandidate ? "rgba(200,155,60,0.08)" : "rgba(255,255,255,0.04)",
+                  }}
+                  transition={{ duration: 0.4 }}
+                  className="rounded-lg border px-2.5 py-1.5 flex items-center gap-2"
+                >
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0"
+                    style={{ background: ["#C89B3C", "#0d7cf2", "#10b981"][i] }}
+                  >
+                    {c.avatar}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-white text-[10px] font-semibold truncate">{c.name}</div>
+                    <div className="text-white/45 text-[9px] truncate">{c.role}</div>
+                  </div>
+                  <div className="shrink-0 flex flex-col items-end gap-0.5">
+                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-semibold ${statusColor[c.status]}`}>
+                      {c.status}
+                    </span>
+                    <span className="text-[#C89B3C] text-[9px] font-bold">{c.match}%</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bar chart - hiring trend */}
+            <div className="bg-white/4 border border-white/8 rounded-lg p-2">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[9px] text-white/40 uppercase tracking-widest">Hiring Trend</span>
+                <motion.span key={tick} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] font-bold text-emerald-400">
+                  +24% ↑
+                </motion.span>
+              </div>
+              <div className="flex items-end gap-1 h-8">
+                {bars.map((h, i) => (
+                  <motion.div
+                    key={`${tick}-${i}`}
+                    initial={{ height: "15%" }}
+                    animate={{ height: `${h}%` }}
+                    transition={{ duration: 0.6, delay: i * 0.06, ease: "easeOut" }}
+                    className={`flex-1 rounded-t-sm ${i === 5 ? "bg-[#C89B3C]" : "bg-[#C89B3C]/30"}`}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between mt-1">
+                {["J","F","M","A","M","J","J"].map((m,i) => (
+                  <span key={i} className="text-[7px] text-white/20 flex-1 text-center">{m}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Pipeline + metrics */}
+          <div className="flex flex-col gap-2 flex-1">
+            {/* Talent Match */}
+            <div className="bg-white/4 border border-white/8 rounded-lg p-2.5">
+              <div className="text-[9px] text-white/35 uppercase tracking-widest mb-2">Talent Match</div>
+              <div className="flex items-center gap-2">
+                <div className="relative w-10 h-10 shrink-0">
+                  <svg className="w-full h-full -rotate-90" viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(200,155,60,0.15)" strokeWidth="3" />
+                    <motion.circle
+                      cx="20" cy="20" r="16"
+                      fill="none" stroke="#C89B3C" strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeDasharray="100.5"
+                      initial={{ strokeDashoffset: 100.5 }}
+                      animate={{ strokeDashoffset: 100.5 * 0.02 }}
+                      transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+                    />
+                  </svg>
+                  <span className="absolute inset-0 flex items-center justify-center text-[#C89B3C] font-black text-[10px]">98%</span>
+                </div>
+                <div className="flex-1 space-y-1">
+                  {[80, 65, 50].map((w, i) => (
+                    <motion.div key={i} className="h-1 rounded-full bg-white/10">
+                      <motion.div
+                        className="h-full rounded-full bg-[#C89B3C]/70"
+                        initial={{ width: "0%" }}
+                        animate={{ width: `${w}%` }}
+                        transition={{ duration: 0.8, delay: 0.5 + i * 0.1 }}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Pipeline funnel */}
+            <div className="bg-white/4 border border-white/8 rounded-lg p-2.5 flex-1">
+              <div className="text-[9px] text-white/35 uppercase tracking-widest mb-2 flex items-center gap-1">
+                <Briefcase className="w-2.5 h-2.5" /> Pipeline
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {pipeline.map((p, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <div className="text-[8px] text-white/35 w-14 shrink-0 truncate">{p.label}</div>
+                    <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: p.color }}
+                        initial={{ width: "0%" }}
+                        whileInView={{ width: `${p.pct}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7, delay: 0.3 + i * 0.1 }}
+                      />
+                    </div>
+                    <span className="text-[8px] font-bold text-white/50 w-5 text-right">{p.count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Open roles badge */}
+            <div className="bg-[#C89B3C]/10 border border-[#C89B3C]/25 rounded-lg p-2 flex items-center justify-between">
+              <div>
+                <div className="text-[9px] text-[#C89B3C]/70 uppercase tracking-widest">Open Roles</div>
+                <div className="text-white font-black text-lg leading-none">12</div>
+              </div>
+              <div className="flex flex-col gap-0.5 text-right">
+                <span className="text-[8px] text-emerald-400">5 Active</span>
+                <span className="text-[8px] text-blue-400">4 Offered</span>
+                <span className="text-[8px] text-white/30">3 Final Rnd</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Bottom: Hiring velocity chart */}
-      <motion.div
-        animate={{ x: [0, 6, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="bg-[#0A2A5E]/90 border border-white/20 rounded-xl p-4 w-56 shadow-xl"
-      >
-        <div className="flex items-center justify-between mb-3">
-          <div className="text-[10px] text-white/50 uppercase tracking-widest">Hiring Velocity</div>
-          <motion.div
-            key={tick}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-[11px] text-[#C89B3C] font-bold"
-          >
-            +24% ↑
-          </motion.div>
-        </div>
-        <div className="flex items-end gap-1.5 h-12">
-          {bars.map((h, i) => (
-            <motion.div
-              key={`${tick}-${i}`}
-              initial={{ height: "15%" }}
-              animate={{ height: `${h}%` }}
-              transition={{ duration: 0.7, delay: i * 0.07, ease: "easeOut" }}
-              className={`flex-1 rounded-t-sm ${i === 5 ? "bg-[#C89B3C]" : "bg-[#C89B3C]/35"}`}
-            />
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Floating badge */}
-      <motion.div
-        animate={{ y: [0, -6, 0], opacity: [0.9, 1, 0.9] }}
-        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/15 backdrop-blur-md border border-white/25 rounded-xl px-3 py-2 shadow-lg"
-      >
-        <div className="text-[10px] text-white/60 uppercase tracking-widest">Placement Rate</div>
-        <div className="text-lg font-black text-[#C89B3C]">98%</div>
-      </motion.div>
     </div>
   );
 }
+
+const trustedLogos = [
+  { name: "PwC", domain: "pwc.com" },
+  { name: "EY", domain: "ey.com" },
+  { name: "Roche", domain: "roche.com" },
+  { name: "Walmart", domain: "walmart.com" },
+  { name: "Sanofi", domain: "sanofi.com" },
+];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 30, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 30, damping: 20 });
+  const springX = useSpring(mouseX, { stiffness: 28, damping: 22 });
+  const springY = useSpring(mouseY, { stiffness: 28, damping: 22 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left - rect.width / 2) / 30);
-    mouseY.set((e.clientY - rect.top - rect.height / 2) / 30);
+    mouseX.set((e.clientX - rect.left - rect.width / 2) / 35);
+    mouseY.set((e.clientY - rect.top - rect.height / 2) / 35);
   };
 
-  const scrollTo = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollDown = () => {
-    sectionRef.current?.nextElementSibling?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollTo = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollDown = () => sectionRef.current?.nextElementSibling?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
@@ -154,42 +259,37 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col bg-[#0A2A5E] overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Rich background */}
+      {/* Background layer */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Gradient blobs */}
         <motion.div
-          animate={{ y: [0, -35, 0], x: [0, 18, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[8%] left-[4%] w-80 h-80 bg-[#C89B3C]/12 rounded-full blur-3xl"
+          animate={{ y: [0, -40, 0], x: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[5%] left-[3%] w-96 h-96 bg-[#C89B3C]/10 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{ y: [0, 28, 0], x: [0, -22, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-          className="absolute bottom-[15%] right-[4%] w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"
+          animate={{ y: [0, 30, 0], x: [0, -25, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[10%] right-[2%] w-[500px] h-[500px] bg-blue-600/8 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-          className="absolute top-[45%] left-[30%] w-56 h-56 bg-[#C89B3C]/6 rounded-full blur-2xl"
+          animate={{ scale: [1, 1.25, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          className="absolute top-[40%] left-[35%] w-64 h-64 bg-[#C89B3C]/5 rounded-full blur-2xl"
         />
-
-        {/* Subtle grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="white" strokeWidth="0.5"/>
+            <pattern id="hero-grid" width="52" height="52" patternUnits="userSpaceOnUse">
+              <path d="M 52 0 L 0 0 0 52" fill="none" stroke="white" strokeWidth="0.6"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-grid)" />
         </svg>
-
-        {/* Particles */}
-        {PARTICLES.map((p) => (
+        {PARTICLES.map(p => (
           <motion.div
             key={p.id}
-            animate={{ opacity: [0.2, 0.7, 0.2], scale: [1, 1.4, 1] }}
+            animate={{ opacity: [0.15, 0.6, 0.15], scale: [1, 1.5, 1] }}
             transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
-            className="absolute rounded-full bg-[#C89B3C]/60"
+            className="absolute rounded-full bg-[#C89B3C]/50"
             style={{ left: p.x, top: p.y, width: p.size, height: p.size }}
           />
         ))}
@@ -197,50 +297,50 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="flex-1 flex items-center pt-20">
-        <div className="container mx-auto px-4 md:px-6 py-12 relative z-10">
-          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="container mx-auto px-4 md:px-6 py-10 relative z-10">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-14 items-center">
 
-            {/* Left: Text */}
+            {/* Left: Copy */}
             <motion.div
-              initial={{ y: 32 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-white space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-white space-y-7"
             >
               <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
                 className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#C89B3C] text-sm font-semibold tracking-wide"
               >
                 <span className="w-2 h-2 bg-[#C89B3C] rounded-full mr-2 animate-pulse" />
                 Premium HR Consulting
               </motion.div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] tracking-tight">
                 Building{" "}
                 <span className="text-[#C89B3C] relative inline-block">
                   Exceptional Teams.
                   <motion.span
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.9, delay: 0.6, ease: "easeOut" }}
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#C89B3C]/50 origin-left block"
+                    transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#C89B3C]/40 origin-left block"
                   />
                 </span>
                 <br />
                 Driving Business Growth.
               </h1>
 
-              <p className="text-base md:text-lg text-white/75 max-w-xl leading-relaxed">
+              <p className="text-base md:text-lg text-white/70 max-w-xl leading-relaxed">
                 Quvora Consulting partners with businesses to solve hiring challenges, attract exceptional talent, and build future-ready organisations through innovative HR consulting solutions.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-1">
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                   <Button
                     size="lg"
-                    className="bg-[#C89B3C] hover:bg-[#b8892e] text-white text-base h-12 px-8 rounded-lg shadow-lg shadow-[#C89B3C]/30 border-0"
+                    className="bg-[#C89B3C] hover:bg-[#b8892e] text-white text-base h-12 px-8 rounded-lg shadow-lg shadow-[#C89B3C]/25 border-0"
                     onClick={() => scrollTo("#contact")}
                   >
                     Get Started <ArrowRight className="ml-2 w-4 h-4" />
@@ -250,7 +350,7 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-white border-white/35 hover:bg-white/12 hover:border-white/50 text-base h-12 px-8 rounded-lg bg-transparent"
+                    className="text-white border-white/30 hover:bg-white/10 hover:border-white/50 text-base h-12 px-8 rounded-lg bg-transparent"
                     onClick={() => scrollTo("#services")}
                   >
                     Explore Services
@@ -258,32 +358,70 @@ export default function Hero() {
                 </motion.div>
               </div>
 
-              {/* Trust signals */}
-              <div className="flex items-center gap-3 pt-1">
-                <div className="flex -space-x-2">
-                  {["S", "R", "M", "P"].map((l, i) => (
-                    <div
+              {/* Trust logos strip */}
+              <div className="pt-2 space-y-3">
+                <p className="text-white/35 text-xs font-medium uppercase tracking-widest">Trusted by leading organisations</p>
+                <div className="flex items-center gap-4 flex-wrap">
+                  {trustedLogos.map((logo, i) => (
+                    <motion.div
                       key={i}
-                      className="w-8 h-8 rounded-full border-2 border-[#0A2A5E] flex items-center justify-center text-xs font-bold text-white"
-                      style={{ backgroundColor: ["#C89B3C", "#0d4a8a", "#1a6aa0", "#C89B3C88"][i] }}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.9 + i * 0.08 }}
+                      className="h-7 flex items-center"
                     >
-                      {l}
-                    </div>
+                      <img
+                        src={`https://logo.clearbit.com/${logo.domain}`}
+                        alt={logo.name}
+                        className="h-6 max-w-[70px] object-contain brightness-0 invert opacity-40 hover:opacity-70 transition-opacity duration-300"
+                        onError={e => {
+                          const t = e.currentTarget.parentElement;
+                          if (t) {
+                            t.innerHTML = `<span class="text-white/30 text-xs font-semibold">${logo.name}</span>`;
+                          }
+                        }}
+                      />
+                    </motion.div>
                   ))}
                 </div>
-                <span className="text-white/50 text-xs">Trusted by 120+ companies across India</span>
               </div>
             </motion.div>
 
-            {/* Right: Interactive dashboard */}
+            {/* Right: Dashboard */}
             <motion.div
-              initial={{ y: 24, scale: 0.96 }}
-              animate={{ y: 0, scale: 1 }}
-              transition={{ duration: 0.85, delay: 0.25, ease: "easeOut" }}
-              style={{ rotateX: springY, rotateY: springX }}
-              className="relative h-[400px] md:h-[440px] perspective-1000"
+              initial={{ opacity: 0, y: 28, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+              className="relative h-[430px] md:h-[470px]"
+              style={{ perspective: "1200px", rotateX: springY, rotateY: springX } as React.CSSProperties}
             >
               <AnimatedDashboard />
+
+              {/* Floating badge top-left */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-4 bg-white rounded-xl shadow-2xl px-4 py-2.5 flex items-center gap-2 z-20 border border-border/30"
+              >
+                <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+                <div>
+                  <div className="text-[10px] text-muted-foreground">Placement Rate</div>
+                  <div className="text-base font-black text-[#0A2A5E] leading-tight">98%</div>
+                </div>
+              </motion.div>
+
+              {/* Floating badge bottom-right */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-2xl px-4 py-2.5 flex items-center gap-2 z-20 border border-border/30"
+              >
+                <TrendingUp className="w-4 h-4 text-[#C89B3C] shrink-0" />
+                <div>
+                  <div className="text-[10px] text-muted-foreground">Avg. Fill Time</div>
+                  <div className="text-base font-black text-[#0A2A5E] leading-tight">18 Days</div>
+                </div>
+              </motion.div>
             </motion.div>
 
           </div>
@@ -297,25 +435,25 @@ export default function Hero() {
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                className="py-5 px-4 text-center group hover:bg-white/5 transition-colors duration-200"
+                transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
+                className="py-5 px-4 text-center group hover:bg-white/5 transition-colors"
               >
-                <div className="text-2xl md:text-3xl font-bold text-[#C89B3C] group-hover:scale-105 transition-transform duration-200">{stat.value}</div>
-                <div className="text-xs md:text-sm text-white/55 mt-1">{stat.label}</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#C89B3C] group-hover:scale-105 transition-transform">{stat.value}</div>
+                <div className="text-xs md:text-sm text-white/50 mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll hint */}
       <motion.button
         onClick={scrollDown}
         animate={{ y: [0, 7, 0] }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[88px] left-1/2 -translate-x-1/2 text-white/40 hover:text-white/70 transition-colors z-10"
+        className="absolute bottom-[84px] left-1/2 -translate-x-1/2 text-white/30 hover:text-white/60 transition-colors z-10"
       >
         <ChevronDown className="w-6 h-6" />
       </motion.button>
