@@ -12,9 +12,9 @@ const methodology = [
 ];
 
 const profileCards = [
-  { name: "Nisha Kapoor", role: "VP – Operations", industry: "BFSI", placed: "EY", match: 96, avatar: "NK", color: "#C89B3C" },
-  { name: "Rohan Desai", role: "Chief Technology Officer", industry: "SaaS", placed: "Logitech", match: 94, avatar: "RD", color: "#0d7cf2" },
-  { name: "Sunita Rao", role: "Head – HR & Culture", industry: "Pharma", placed: "Sanofi", match: 98, avatar: "SR", color: "#10b981" },
+  { role: "VP – Operations", dept: "Banking & Financial Services", match: 96, icon: "VO", color: "#C89B3C", tag: "Executive" },
+  { role: "Chief Technology Officer", dept: "SaaS / Product Technology", match: 94, icon: "CT", color: "#0d7cf2", tag: "C-Suite" },
+  { role: "Head – HR & Culture", dept: "Pharmaceutical Industry", match: 98, icon: "HC", color: "#10b981", tag: "Leadership" },
 ];
 
 const impactStats = [
@@ -95,14 +95,14 @@ function RichIllustration() {
             className="group flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/20 rounded-xl px-3 py-2.5 transition-all duration-300 cursor-default"
           >
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-lg"
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-[10px] shrink-0 shadow-lg"
               style={{ background: `linear-gradient(135deg, ${c.color}, ${c.color}88)` }}
             >
-              {c.avatar}
+              {c.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-white text-[11px] font-semibold truncate">{c.name}</div>
-              <div className="text-white/45 text-[9px] truncate">{c.role} · {c.industry}</div>
+              <div className="text-white text-[11px] font-semibold truncate">{c.role}</div>
+              <div className="text-white/45 text-[9px] truncate">{c.dept}</div>
             </div>
             <div className="shrink-0 text-right">
               <div className="text-[#C89B3C] font-black text-sm leading-none">{c.match}%</div>

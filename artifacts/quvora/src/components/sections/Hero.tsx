@@ -20,9 +20,9 @@ const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
 }));
 
 const candidates = [
-  { name: "Priya Sharma", role: "VP – Human Resources", exp: "12 yrs", match: 97, status: "Interview", avatar: "PS" },
-  { name: "Arjun Mehta", role: "Chief Financial Officer", exp: "15 yrs", match: 94, status: "Offered", avatar: "AM" },
-  { name: "Riya Bose", role: "Head of Engineering", exp: "10 yrs", match: 91, status: "Screening", avatar: "RB" },
+  { role: "VP – Human Resources", dept: "People & Culture", match: 97, status: "Interview", icon: "HR", color: "#C89B3C" },
+  { role: "Chief Financial Officer", dept: "Finance & Strategy", match: 94, status: "Offered", icon: "CF", color: "#0d7cf2" },
+  { role: "Head of Engineering", dept: "Technology", match: 91, status: "Screening", icon: "EG", color: "#10b981" },
 ];
 
 const pipeline = [
@@ -103,13 +103,13 @@ function AnimatedDashboard() {
                 >
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0"
-                    style={{ background: ["#C89B3C", "#0d7cf2", "#10b981"][i] }}
+                    style={{ background: c.color }}
                   >
-                    {c.avatar}
+                    {c.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-white text-[10px] font-semibold truncate">{c.name}</div>
-                    <div className="text-white/45 text-[9px] truncate">{c.role}</div>
+                    <div className="text-white text-[10px] font-semibold truncate">{c.role}</div>
+                    <div className="text-white/45 text-[9px] truncate">{c.dept}</div>
                   </div>
                   <div className="shrink-0 flex flex-col items-end gap-0.5">
                     <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-semibold ${statusColor[c.status]}`}>
