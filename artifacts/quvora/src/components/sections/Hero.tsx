@@ -398,15 +398,6 @@ export default function Hero() {
             >
               <AnimatedDashboard />
 
-              {/* Floating card top-left — Quvora Edge */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -left-6 z-20"
-              >
-                <QuvoraEdgeCard />
-              </motion.div>
-
               {/* Floating card bottom-right — Role Demand */}
               <motion.div
                 animate={{ y: [0, 6, 0] }}
