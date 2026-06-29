@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import InsightsTicker from "@/components/InsightsTicker";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import WhyChoose from "@/components/sections/WhyChoose";
@@ -22,7 +21,6 @@ export default function Home() {
   return (
     <div className="w-full font-sans bg-background text-foreground">
       <Navbar />
-      <InsightsTicker />
       
       <main>
         <Hero />

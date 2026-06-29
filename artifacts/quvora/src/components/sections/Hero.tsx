@@ -3,44 +3,41 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, ArrowUpRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
-const quvoraEdge = [
-  { icon: "🎯", text: "Executive search across C-suite, VP & director roles" },
-  { icon: "🏙️", text: "Active in Mumbai, Bengaluru, Delhi NCR & Hyderabad" },
-  { icon: "🤝", text: "Your talent partner from search to successful joining" },
-];
+const focusIndustries = ["BFSI", "IT / SaaS", "Pharma", "D2C", "Manufacturing", "Consulting"];
 
 function QuvoraEdgeCard() {
   return (
     <div
       className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden"
-      style={{ width: 218 }}
+      style={{ width: 192 }}
     >
       {/* Header */}
-      <div className="px-4 pt-3.5 pb-2.5 border-b border-white/8">
+      <div className="px-3.5 pt-3 pb-2.5 border-b border-white/8">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded-lg bg-[#C89B3C] flex items-center justify-center shrink-0">
             <span className="text-white font-black text-[10px]">Q</span>
           </div>
           <div>
             <p className="text-white font-bold text-[11px] leading-none">Quvora Consulting</p>
-            <p className="text-[#C89B3C] text-[8px] tracking-wide mt-0.5">Strategic HR Partner</p>
+            <p className="text-[#C89B3C] text-[8px] tracking-wide mt-0.5">Leadership · HR Advisory</p>
           </div>
         </div>
       </div>
 
-      {/* Content bullets */}
-      <div className="px-4 pt-3 pb-3 flex flex-col gap-3">
-        {quvoraEdge.map((item, i) => (
-          <div key={i} className="flex items-start gap-2.5">
-            <span className="text-[13px] shrink-0 mt-0.5 leading-none">{item.icon}</span>
-            <p className="text-white/65 text-[10px] leading-relaxed">{item.text}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div className="mx-4 mb-3.5 px-3 py-2 rounded-xl bg-[#C89B3C]/10 border border-[#C89B3C]/20">
-        <p className="text-[#C89B3C] text-[10px] font-semibold text-center">500+ Leaders Placed Across India</p>
+      {/* Industries */}
+      <div className="px-3.5 pt-2.5 pb-3">
+        <p className="text-[7.5px] text-white/25 uppercase tracking-widest mb-2">Industries Served</p>
+        <div className="flex flex-wrap gap-1.5">
+          {focusIndustries.map((ind) => (
+            <span
+              key={ind}
+              className="text-[9px] font-semibold px-2 py-1 rounded-full border border-white/10 text-white/55"
+              style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
+            >
+              {ind}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -184,12 +181,12 @@ function AnimatedDashboard() {
           <AnimatePresence mode="popLayout">
             {visible.map((p, i) => (
               <motion.div
-                key={`${p.role}-${visibleStart}`}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 8 }}
-                transition={{ duration: 0.35, delay: i * 0.06 }}
-                className="flex items-center gap-3 bg-white/5 border border-white/8 rounded-xl px-3 py-2.5"
+                key={p.role}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+                className="flex items-center gap-3 bg-white/5 border border-white/8 rounded-xl px-3 py-2"
               >
                 {/* Avatar */}
                 <div
