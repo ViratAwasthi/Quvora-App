@@ -43,46 +43,59 @@ function QuvoraEdgeCard() {
   );
 }
 
-const demandRows = [
-  { label: "C-Suite / Leadership", pct: 94, color: "#C89B3C" },
-  { label: "Engineering & Tech", pct: 88, color: "#0d7cf2" },
-  { label: "Finance & Risk", pct: 74, color: "#10b981" },
-  { label: "HR / People Ops", pct: 81, color: "#8b5cf6" },
+const firmPillars = [
+  { label: "C-Suite Hiring" },
+  { label: "Leadership Search" },
+  { label: "HR Advisory" },
+  { label: "Talent Strategy" },
 ];
 
-function RoleDemandCard() {
+const firmCities = ["Mumbai", "Bengaluru", "Delhi NCR", "Hyderabad", "Pune"];
+
+function WhoWeAreCard() {
   return (
     <div
       className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden"
-      style={{ width: 210 }}
+      style={{ width: 214 }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
-        <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Role Demand Index</span>
-        <ArrowUpRight className="w-3 h-3 text-emerald-400" />
+      {/* Label */}
+      <div className="px-4 pt-3.5 pb-0">
+        <span className="text-[8px] text-[#C89B3C] uppercase tracking-[0.15em] font-bold">Who We Are</span>
       </div>
 
-      {/* Bar rows */}
-      <div className="px-4 pt-3 pb-3.5 flex flex-col gap-2.5">
-        {demandRows.map((row, i) => (
-          <div key={i}>
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[9px] text-white/50 truncate flex-1 mr-2">{row.label}</span>
-              <span className="text-[9px] font-bold shrink-0" style={{ color: row.color }}>{row.pct}</span>
-            </div>
-            <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${row.pct}%`, backgroundColor: row.color }}
-              />
-            </div>
-          </div>
-        ))}
+      {/* Identity block */}
+      <div className="px-4 pt-2 pb-3 border-b border-white/8">
+        <p className="text-white font-black text-[15px] leading-tight tracking-tight">Quvora</p>
+        <p className="text-white/50 text-[10px] mt-0.5 leading-snug">India's strategic HR &amp; leadership hiring partner</p>
       </div>
 
-      {/* Footer label */}
-      <div className="px-4 pb-3 border-t border-white/6 pt-2">
-        <span className="text-[8px] text-white/20 uppercase tracking-widest">Demand score · Q2 2026</span>
+      {/* Focus pillars */}
+      <div className="px-4 pt-2.5 pb-2.5 border-b border-white/8">
+        <p className="text-[7.5px] text-white/25 uppercase tracking-widest mb-2">What We Do</p>
+        <div className="flex flex-wrap gap-1.5">
+          {firmPillars.map((p) => (
+            <span
+              key={p.label}
+              className="text-[8.5px] font-semibold px-2 py-[3px] rounded-full text-white/60 border border-white/10"
+              style={{ backgroundColor: "rgba(200,155,60,0.07)" }}
+            >
+              {p.label}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Cities */}
+      <div className="px-4 pt-2.5 pb-3">
+        <p className="text-[7.5px] text-white/25 uppercase tracking-widest mb-1.5">Active Across</p>
+        <div className="flex flex-wrap gap-x-2 gap-y-1">
+          {firmCities.map((c) => (
+            <span key={c} className="text-[8.5px] text-white/45 flex items-center gap-1">
+              <span className="w-1 h-1 rounded-full bg-emerald-400/60 inline-block shrink-0" />
+              {c}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -404,7 +417,7 @@ export default function Hero() {
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
                 className="absolute -bottom-6 -right-6 z-20"
               >
-                <RoleDemandCard />
+                <WhoWeAreCard />
               </motion.div>
             </motion.div>
 
