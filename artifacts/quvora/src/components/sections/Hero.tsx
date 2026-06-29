@@ -33,33 +33,42 @@ const activeMandates = [
   },
 ];
 
-const marketSignals = [
+const placementWins = [
   {
-    headline: "BFSI leadership hiring",
-    delta: "+38%",
-    direction: "up",
-    period: "Q2 · FY 2026",
-    insight: "C-suite mandates rising across private banks and NBFCs in India.",
+    role: "Chief Digital Officer",
+    orgType: "Leading Private Bank",
+    city: "Mumbai",
     sector: "BFSI",
+    daysToFill: 14,
+    matchScore: 97,
+    skills: ["Digital Banking", "P&L Leadership", "RBI Compliance"],
+    impact: "Mandated to lead ₹800 Cr digital transformation roadmap",
     accentColor: "#C89B3C",
+    initials: "CD",
   },
   {
-    headline: "Tech talent demand",
-    delta: "+51%",
-    direction: "up",
-    period: "Q2 · FY 2026",
-    insight: "AI, platform and product roles driving surge across Bengaluru & Pune.",
+    role: "Head of Engineering",
+    orgType: "Series-C SaaS Startup",
+    city: "Bengaluru",
     sector: "IT / SaaS",
+    daysToFill: 11,
+    matchScore: 94,
+    skills: ["Platform Engineering", "AI/ML", "Team Scaling"],
+    impact: "Tasked with growing tech team from 40 to 200 in 18 months",
     accentColor: "#0d7cf2",
+    initials: "HE",
   },
   {
-    headline: "D2C brand expansion",
-    delta: "+29%",
-    direction: "up",
-    period: "Q2 · FY 2026",
-    insight: "Supply chain and ops leaders in high demand as D2C brands scale tier-2.",
-    sector: "D2C / Retail",
-    accentColor: "#8b5cf6",
+    role: "VP – Human Resources",
+    orgType: "Top Pharma MNC",
+    city: "Hyderabad",
+    sector: "Pharma",
+    daysToFill: 16,
+    matchScore: 98,
+    skills: ["HRBP", "Talent COE", "Org Design"],
+    impact: "Driving people strategy across 3,000+ workforce in India",
+    accentColor: "#10b981",
+    initials: "VP",
   },
 ];
 
@@ -140,85 +149,97 @@ function LiveMandateCard() {
   );
 }
 
-function MarketSignalCard() {
+function PlacementWinCard() {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % marketSignals.length), 4200);
+    const t = setInterval(() => setIdx(i => (i + 1) % placementWins.length), 4000);
     return () => clearInterval(t);
   }, []);
-  const s = marketSignals[idx];
-  const sparkline = [30, 42, 38, 55, 50, 68, 74, 88];
+  const p = placementWins[idx];
 
   return (
-    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 214 }}>
+    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 220 }}>
       {/* Header */}
-      <div className="px-3.5 pt-3 pb-2 border-b border-white/8">
-        <div className="flex items-center justify-between">
-          <span className="text-[9px] text-emerald-400 uppercase tracking-widest font-bold">India Market Signal</span>
-          <Sparkles className="w-3 h-3 text-white/20" />
-        </div>
+      <div className="px-3.5 pt-3 pb-2 border-b border-white/8 flex items-center justify-between">
+        <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Placement Win</span>
+        <span className="flex items-center gap-1">
+          <CheckCircle className="w-3 h-3 text-emerald-400" />
+          <span className="text-[8px] text-emerald-400 font-semibold">Placed</span>
+        </span>
       </div>
 
-      {/* Cycling content */}
-      <div className="px-3.5 py-2.5">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.35 }}
-          >
-            {/* Headline + delta */}
-            <div className="flex items-start justify-between gap-2 mb-1">
-              <p className="text-white font-bold text-[12px] leading-snug">{s.headline}</p>
-              <div className="flex items-center gap-0.5 shrink-0">
-                <ArrowUpRight className="w-3 h-3 text-emerald-400" />
-                <span className="text-emerald-400 font-black text-[13px]">{s.delta}</span>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.35 }}
+        >
+          {/* Role + org */}
+          <div className="px-3.5 pt-2.5 pb-2 flex items-start gap-2.5">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0"
+              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}88)` }}
+            >
+              {p.initials}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-bold text-[11px] leading-snug truncate">{p.role}</p>
+              <p className="text-white/40 text-[9px] truncate">{p.orgType}</p>
+              <div className="flex items-center gap-1 mt-0.5">
+                <MapPin className="w-2.5 h-2.5 text-white/30 shrink-0" />
+                <span className="text-[8px] text-white/40">{p.city}</span>
+                <span className="text-white/20">·</span>
+                <span
+                  className="text-[8px] font-semibold px-1 py-0.5 rounded-full"
+                  style={{ color: p.accentColor, backgroundColor: `${p.accentColor}18` }}
+                >{p.sector}</span>
               </div>
             </div>
-            {/* Period + sector tag */}
-            <div className="flex items-center gap-1.5 mb-2.5">
-              <span className="text-[8px] text-white/35">{s.period}</span>
-              <span className="text-white/20 text-[8px]">·</span>
-              <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full" style={{ color: s.accentColor, backgroundColor: `${s.accentColor}18` }}>{s.sector}</span>
+          </div>
+
+          {/* Skill tags */}
+          <div className="px-3.5 pb-2 flex flex-wrap gap-1">
+            {p.skills.map(skill => (
+              <span key={skill} className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/8 text-white/55 border border-white/10">
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          {/* Impact line */}
+          <div className="mx-3.5 mb-2.5 px-2.5 py-2 rounded-xl bg-white/5 border border-white/8">
+            <p className="text-[8.5px] text-white/55 leading-relaxed italic">"{p.impact}"</p>
+          </div>
+
+          {/* Stats row */}
+          <div className="px-3.5 pb-3 grid grid-cols-2 gap-2">
+            <div className="bg-white/5 rounded-lg p-2 text-center">
+              <div className="flex items-center justify-center gap-0.5">
+                <Clock className="w-2.5 h-2.5 text-[#C89B3C]" />
+                <span className="text-[#C89B3C] font-black text-[13px]">{p.daysToFill}</span>
+                <span className="text-white/35 text-[8px]">d</span>
+              </div>
+              <p className="text-[7.5px] text-white/30 mt-0.5">Time to Fill</p>
             </div>
-            {/* Sparkline */}
-            <div className="mb-2.5">
-              <svg viewBox="0 0 80 28" className="w-full h-7">
-                <defs>
-                  <linearGradient id={`sg-${idx}`} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={s.accentColor} stopOpacity="0.3" />
-                    <stop offset="100%" stopColor={s.accentColor} stopOpacity="0.02" />
-                  </linearGradient>
-                </defs>
-                <polyline
-                  points={sparkline.map((v, i) => `${i * (80 / (sparkline.length - 1))},${28 - (v / 100) * 24}`).join(" ")}
-                  fill="none"
-                  stroke={s.accentColor}
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <polygon
-                  points={[
-                    ...sparkline.map((v, i) => `${i * (80 / (sparkline.length - 1))},${28 - (v / 100) * 24}`),
-                    `80,28`, `0,28`
-                  ].join(" ")}
-                  fill={`url(#sg-${idx})`}
-                />
-              </svg>
+            <div className="bg-white/5 rounded-lg p-2 text-center">
+              <div className="flex items-center justify-center gap-0.5">
+                <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
+                <span className="text-emerald-400 font-black text-[13px]">{p.matchScore}</span>
+                <span className="text-white/35 text-[8px]">%</span>
+              </div>
+              <p className="text-[7.5px] text-white/30 mt-0.5">Match Score</p>
             </div>
-            {/* Insight text */}
-            <p className="text-[9px] text-white/45 leading-relaxed">{s.insight}</p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
       {/* Dot indicators */}
       <div className="flex justify-center gap-1 pb-2.5">
-        {marketSignals.map((_, i) => (
-          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300" style={{ backgroundColor: i === idx ? "#10b981" : "rgba(255,255,255,0.15)" }} />
+        {placementWins.map((_, i) => (
+          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300"
+            style={{ backgroundColor: i === idx ? p.accentColor : "rgba(255,255,255,0.15)" }} />
         ))}
       </div>
     </div>
@@ -620,13 +641,13 @@ export default function Hero() {
                 <LiveMandateCard />
               </motion.div>
 
-              {/* Floating card bottom-right — Market Signal */}
+              {/* Floating card bottom-right — Placement Win */}
               <motion.div
                 animate={{ y: [0, 7, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="absolute -bottom-6 -right-6 z-20"
               >
-                <MarketSignalCard />
+                <PlacementWinCard />
               </motion.div>
             </motion.div>
 
