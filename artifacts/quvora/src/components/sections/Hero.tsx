@@ -1,7 +1,229 @@
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, Briefcase } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, Briefcase, MapPin, Sparkles, ArrowUpRight, Clock } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+
+const activeMandates = [
+  {
+    role: "Chief People Officer",
+    sector: "BFSI",
+    city: "Mumbai",
+    stage: "Shortlisting",
+    stageColor: "#C89B3C",
+    insight: "4 candidates advancing to panel interviews",
+    elapsed: "Day 11",
+  },
+  {
+    role: "VP – Engineering",
+    sector: "SaaS",
+    city: "Bengaluru",
+    stage: "Interviews",
+    stageColor: "#0d7cf2",
+    insight: "Final round scheduled with 2 shortlists",
+    elapsed: "Day 8",
+  },
+  {
+    role: "Head of Finance",
+    sector: "Pharma",
+    city: "Hyderabad",
+    stage: "Screening",
+    stageColor: "#10b981",
+    insight: "148 profiles reviewed, 12 progressing",
+    elapsed: "Day 4",
+  },
+];
+
+const marketSignals = [
+  {
+    headline: "BFSI leadership hiring",
+    delta: "+38%",
+    direction: "up",
+    period: "Q2 · FY 2026",
+    insight: "C-suite mandates rising across private banks and NBFCs in India.",
+    sector: "BFSI",
+    accentColor: "#C89B3C",
+  },
+  {
+    headline: "Tech talent demand",
+    delta: "+51%",
+    direction: "up",
+    period: "Q2 · FY 2026",
+    insight: "AI, platform and product roles driving surge across Bengaluru & Pune.",
+    sector: "IT / SaaS",
+    accentColor: "#0d7cf2",
+  },
+  {
+    headline: "D2C brand expansion",
+    delta: "+29%",
+    direction: "up",
+    period: "Q2 · FY 2026",
+    insight: "Supply chain and ops leaders in high demand as D2C brands scale tier-2.",
+    sector: "D2C / Retail",
+    accentColor: "#8b5cf6",
+  },
+];
+
+function LiveMandateCard() {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx(i => (i + 1) % activeMandates.length), 3800);
+    return () => clearInterval(t);
+  }, []);
+  const m = activeMandates[idx];
+  const stages = ["Screening", "Shortlisting", "Interviews", "Offer"];
+  const stageIdx = stages.indexOf(m.stage);
+
+  return (
+    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 210 }}>
+      {/* Header */}
+      <div className="px-3.5 pt-3 pb-2 border-b border-white/8">
+        <div className="flex items-center justify-between mb-0.5">
+          <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Live Mandate</span>
+          <span className="flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[8px] text-white/35">Active</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Cycling role content */}
+      <div className="px-3.5 py-2.5 min-h-[90px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35 }}
+          >
+            <p className="text-white font-bold text-[12px] leading-snug mb-1">{m.role}</p>
+            <div className="flex items-center gap-1.5 mb-2">
+              <MapPin className="w-2.5 h-2.5 text-white/35 shrink-0" />
+              <span className="text-[9px] text-white/45">{m.city}</span>
+              <span className="text-white/20 text-[9px]">·</span>
+              <span className="text-[9px] text-white/45">{m.sector}</span>
+            </div>
+            <p className="text-[9px] text-white/50 leading-relaxed italic mb-2.5">"{m.insight}"</p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Stage pipeline */}
+      <div className="px-3.5 pb-2.5">
+        <div className="flex items-center gap-1 mb-1.5">
+          {stages.map((s, i) => (
+            <div
+              key={s}
+              className="flex-1 h-1 rounded-full transition-all duration-500"
+              style={{ backgroundColor: i <= stageIdx ? m.stageColor : "rgba(255,255,255,0.1)" }}
+            />
+          ))}
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full" style={{ color: m.stageColor, backgroundColor: `${m.stageColor}18` }}>
+            {m.stage}
+          </span>
+          <div className="flex items-center gap-1 text-white/30">
+            <Clock className="w-2.5 h-2.5" />
+            <span className="text-[8px]">{m.elapsed}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1 pb-2.5">
+        {activeMandates.map((_, i) => (
+          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300" style={{ backgroundColor: i === idx ? "#C89B3C" : "rgba(255,255,255,0.15)" }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MarketSignalCard() {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx(i => (i + 1) % marketSignals.length), 4200);
+    return () => clearInterval(t);
+  }, []);
+  const s = marketSignals[idx];
+  const sparkline = [30, 42, 38, 55, 50, 68, 74, 88];
+
+  return (
+    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 214 }}>
+      {/* Header */}
+      <div className="px-3.5 pt-3 pb-2 border-b border-white/8">
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] text-emerald-400 uppercase tracking-widest font-bold">India Market Signal</span>
+          <Sparkles className="w-3 h-3 text-white/20" />
+        </div>
+      </div>
+
+      {/* Cycling content */}
+      <div className="px-3.5 py-2.5">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35 }}
+          >
+            {/* Headline + delta */}
+            <div className="flex items-start justify-between gap-2 mb-1">
+              <p className="text-white font-bold text-[12px] leading-snug">{s.headline}</p>
+              <div className="flex items-center gap-0.5 shrink-0">
+                <ArrowUpRight className="w-3 h-3 text-emerald-400" />
+                <span className="text-emerald-400 font-black text-[13px]">{s.delta}</span>
+              </div>
+            </div>
+            {/* Period + sector tag */}
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <span className="text-[8px] text-white/35">{s.period}</span>
+              <span className="text-white/20 text-[8px]">·</span>
+              <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full" style={{ color: s.accentColor, backgroundColor: `${s.accentColor}18` }}>{s.sector}</span>
+            </div>
+            {/* Sparkline */}
+            <div className="mb-2.5">
+              <svg viewBox="0 0 80 28" className="w-full h-7">
+                <defs>
+                  <linearGradient id={`sg-${idx}`} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={s.accentColor} stopOpacity="0.3" />
+                    <stop offset="100%" stopColor={s.accentColor} stopOpacity="0.02" />
+                  </linearGradient>
+                </defs>
+                <polyline
+                  points={sparkline.map((v, i) => `${i * (80 / (sparkline.length - 1))},${28 - (v / 100) * 24}`).join(" ")}
+                  fill="none"
+                  stroke={s.accentColor}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <polygon
+                  points={[
+                    ...sparkline.map((v, i) => `${i * (80 / (sparkline.length - 1))},${28 - (v / 100) * 24}`),
+                    `80,28`, `0,28`
+                  ].join(" ")}
+                  fill={`url(#sg-${idx})`}
+                />
+              </svg>
+            </div>
+            {/* Insight text */}
+            <p className="text-[9px] text-white/45 leading-relaxed">{s.insight}</p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1 pb-2.5">
+        {marketSignals.map((_, i) => (
+          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300" style={{ backgroundColor: i === idx ? "#10b981" : "rgba(255,255,255,0.15)" }} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const stats = [
   { value: "500+", label: "Successful Placements" },
@@ -389,82 +611,22 @@ export default function Hero() {
             >
               <AnimatedDashboard />
 
-              {/* Floating card top-left — Pan-India Reach */}
+              {/* Floating card top-left — Live Mandate */}
               <motion.div
                 animate={{ y: [0, -7, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-5 -left-5 z-20 rounded-2xl shadow-2xl overflow-hidden"
-                style={{ width: 178 }}
+                className="absolute -top-6 -left-6 z-20"
               >
-                <div className="bg-[#0A2A5E] border border-white/10 p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <p className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-semibold">Pan-India Reach</p>
-                      <p className="text-white text-[11px] font-bold leading-tight">Active Markets</p>
-                    </div>
-                    <div className="w-7 h-7 rounded-lg bg-[#C89B3C]/15 flex items-center justify-center">
-                      <Briefcase className="w-3.5 h-3.5 text-[#C89B3C]" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    {[
-                      { city: "Mumbai", pct: 88 },
-                      { city: "Bengaluru", pct: 94 },
-                      { city: "Delhi NCR", pct: 76 },
-                    ].map(({ city, pct }) => (
-                      <div key={city} className="flex items-center gap-1.5">
-                        <span className="text-[9px] text-white/50 w-16 shrink-0">{city}</span>
-                        <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
-                          <motion.div
-                            className="h-full rounded-full bg-[#C89B3C]"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${pct}%` }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                          />
-                        </div>
-                        <span className="text-[9px] text-[#C89B3C] font-bold w-5 text-right">{pct}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <LiveMandateCard />
               </motion.div>
 
-              {/* Floating card bottom-right — India Sector Pulse */}
+              {/* Floating card bottom-right — Market Signal */}
               <motion.div
                 animate={{ y: [0, 7, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-5 -right-5 z-20 rounded-2xl shadow-2xl overflow-hidden"
-                style={{ width: 184 }}
+                className="absolute -bottom-6 -right-6 z-20"
               >
-                <div className="bg-[#0A2A5E] border border-white/10 p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <p className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-semibold">Sector Pulse</p>
-                      <p className="text-white text-[11px] font-bold leading-tight">Hiring Demand · India</p>
-                    </div>
-                    <div className="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
-                      <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    {[
-                      { sector: "BFSI", tag: "High", color: "#C89B3C" },
-                      { sector: "IT / SaaS", tag: "Surging", color: "#10b981" },
-                      { sector: "Pharma", tag: "Steady", color: "#0d7cf2" },
-                      { sector: "D2C / Retail", tag: "Growing", color: "#8b5cf6" },
-                    ].map(({ sector, tag, color }) => (
-                      <div key={sector} className="flex items-center justify-between">
-                        <span className="text-[9px] text-white/60">{sector}</span>
-                        <span
-                          className="text-[8px] font-bold px-1.5 py-0.5 rounded-full"
-                          style={{ color, backgroundColor: `${color}20` }}
-                        >
-                          {tag}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <MarketSignalCard />
               </motion.div>
             </motion.div>
 
