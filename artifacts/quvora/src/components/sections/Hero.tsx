@@ -358,32 +358,24 @@ export default function Hero() {
                 </motion.div>
               </div>
 
-              {/* Trust logos strip */}
-              <div className="pt-2 space-y-3">
-                <p className="text-white/35 text-xs font-medium uppercase tracking-widest">Trusted by leading organisations</p>
-                <div className="flex items-center gap-4 flex-wrap">
-                  {trustedLogos.map((logo, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.9 + i * 0.08 }}
-                      className="h-7 flex items-center"
-                    >
-                      <img
-                        src={`https://logo.clearbit.com/${logo.domain}`}
-                        alt={logo.name}
-                        className="h-6 max-w-[70px] object-contain brightness-0 invert opacity-40 hover:opacity-70 transition-opacity duration-300"
-                        onError={e => {
-                          const t = e.currentTarget.parentElement;
-                          if (t) {
-                            t.innerHTML = `<span class="text-white/30 text-xs font-semibold">${logo.name}</span>`;
-                          }
-                        }}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
+              {/* Key proof points */}
+              <div className="pt-2 flex flex-wrap gap-3">
+                {[
+                  { icon: CheckCircle, label: "End-to-end talent lifecycle" },
+                  { icon: TrendingUp, label: "Data-driven matching" },
+                  { icon: Users, label: "Cross-industry expertise" },
+                ].map(({ icon: Icon, label }, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.9 + i * 0.1 }}
+                    className="flex items-center gap-2 text-white/60 text-sm"
+                  >
+                    <Icon className="w-4 h-4 text-[#C89B3C] shrink-0" />
+                    <span>{label}</span>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
 
