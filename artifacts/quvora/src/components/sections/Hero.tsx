@@ -262,222 +262,146 @@ const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
   delay: i * 0.3,
 }));
 
-const candidates = [
-  { role: "VP – Human Resources", dept: "People & Culture", match: 97, status: "Interview", icon: "HR", color: "#C89B3C" },
-  { role: "Chief Financial Officer", dept: "Finance & Strategy", match: 94, status: "Offered", icon: "CF", color: "#0d7cf2" },
-  { role: "Head of Engineering", dept: "Technology", match: 91, status: "Screening", icon: "EG", color: "#10b981" },
+const recentPlacements = [
+  { initials: "VO", role: "VP – Operations", industry: "Banking & Financial Services", match: 96, color: "#C89B3C" },
+  { initials: "CT", role: "Chief Technology Officer", industry: "SaaS / Product Technology", match: 94, color: "#0d7cf2" },
+  { initials: "HC", role: "Head – HR & Culture", industry: "Pharmaceutical Industry", match: 98, color: "#10b981" },
+  { initials: "MD", role: "Managing Director", industry: "Investment Banking · Mumbai", match: 97, color: "#8b5cf6" },
+  { initials: "CS", role: "Chief Strategy Officer", industry: "D2C / Consumer Brands", match: 95, color: "#f59e0b" },
+  { initials: "VP", role: "VP – Digital Transformation", industry: "NBFC / Fintech", match: 93, color: "#ec4899" },
 ];
 
-const pipeline = [
-  { label: "Applications", count: 148, color: "#C89B3C", pct: 100 },
-  { label: "Screened", count: 62, color: "#0d7cf2", pct: 42 },
-  { label: "Interviewed", count: 24, color: "#10b981", pct: 16 },
-  { label: "Shortlisted", count: 9, color: "#8b5cf6", pct: 6 },
-  { label: "Placed", count: 4, color: "#C89B3C", pct: 3 },
+const dashStats = [
+  { value: "500+", label: "Placements" },
+  { value: "98%", label: "Match Score" },
+  { value: "10+", label: "Industries" },
+  { value: "18d", label: "Avg Fill Time" },
 ];
 
-const bars = [38, 55, 48, 70, 62, 88, 74];
-
-const statusColor: Record<string, string> = {
-  Interview: "bg-blue-500/20 text-blue-300",
-  Offered: "bg-emerald-500/20 text-emerald-300",
-  Screening: "bg-amber-500/20 text-amber-300",
-};
+const teamDots = ["#C89B3C", "#0d7cf2", "#10b981"];
 
 function AnimatedDashboard() {
-  const [tick, setTick] = useState(0);
-  const [activeCandidate, setActiveCandidate] = useState(0);
+  const [visibleStart, setVisibleStart] = useState(0);
+  const VISIBLE = 3;
 
   useEffect(() => {
     const t = setInterval(() => {
-      setTick(n => n + 1);
-      setActiveCandidate(n => (n + 1) % candidates.length);
-    }, 2800);
+      setVisibleStart(n => (n + 1) % recentPlacements.length);
+    }, 2600);
     return () => clearInterval(t);
   }, []);
 
-  return (
-    <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl" style={{ perspective: "1000px" }}>
-      {/* Glassmorphism background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A2A5E]/95 via-[#0d3272]/90 to-[#122d6a]/95 backdrop-blur-md border border-white/12" />
+  const visible = Array.from({ length: VISIBLE }, (_, i) =>
+    recentPlacements[(visibleStart + i) % recentPlacements.length]
+  );
 
-      {/* Subtle inner grid */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+  return (
+    <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#071d42] via-[#0a2455] to-[#0d2d6b] border border-white/10" />
+
+      {/* Subtle dot grid */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <pattern id="dash-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-            <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" strokeWidth="0.5"/>
+          <pattern id="dot-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" fill="white" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#dash-grid)" />
+        <rect width="100%" height="100%" fill="url(#dot-grid)" />
       </svg>
 
-      <div className="relative z-10 h-full flex flex-col p-4 gap-3">
-        {/* Header bar */}
-        <div className="flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-[#C89B3C] flex items-center justify-center">
-              <span className="text-white font-black text-[10px]">Q</span>
+      <div className="relative z-10 h-full flex flex-col p-4">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-4 shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#C89B3C] flex items-center justify-center shadow-lg">
+              <span className="text-white font-black text-sm">Q</span>
             </div>
-            <span className="text-white/80 text-xs font-semibold tracking-wide">Quvora HR Suite</span>
+            <div>
+              <p className="text-white font-bold text-sm leading-tight">Talent Intelligence</p>
+              <p className="text-white/40 text-[9px]">Powered by Quvora</p>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white/40 text-[10px]">Live</span>
+          <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full px-2.5 py-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="text-emerald-400 text-[9px] font-semibold">Live Pipeline</span>
           </div>
         </div>
 
-        {/* Main content: 2 columns */}
-        <div className="flex gap-3 flex-1 min-h-0">
-          {/* Left: Candidates */}
-          <div className="flex flex-col gap-2 w-[52%]">
-            <div className="text-[9px] text-white/35 uppercase tracking-widest font-semibold flex items-center gap-1">
-              <Users className="w-2.5 h-2.5" /> Active Candidates
-            </div>
-            <div className="flex flex-col gap-1.5 flex-1">
-              {candidates.map((c, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    borderColor: i === activeCandidate ? "rgba(200,155,60,0.5)" : "rgba(255,255,255,0.08)",
-                    backgroundColor: i === activeCandidate ? "rgba(200,155,60,0.08)" : "rgba(255,255,255,0.04)",
-                  }}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-lg border px-2.5 py-1.5 flex items-center gap-2"
+        {/* Recent Placements label */}
+        <div className="flex items-center gap-1.5 mb-2.5 shrink-0">
+          <Users className="w-3 h-3 text-white/30" />
+          <span className="text-[9px] text-white/30 uppercase tracking-widest font-semibold">Recent Placements</span>
+        </div>
+
+        {/* Placement rows */}
+        <div className="flex flex-col gap-2 flex-1 min-h-0">
+          <AnimatePresence mode="popLayout">
+            {visible.map((p, i) => (
+              <motion.div
+                key={`${p.role}-${visibleStart}`}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 8 }}
+                transition={{ duration: 0.35, delay: i * 0.06 }}
+                className="flex items-center gap-3 bg-white/5 border border-white/8 rounded-xl px-3 py-2.5"
+              >
+                {/* Avatar */}
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0"
+                  style={{ background: `linear-gradient(135deg, ${p.color}, ${p.color}77)` }}
                 >
-                  <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0"
-                    style={{ background: c.color }}
-                  >
-                    {c.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-white text-[10px] font-semibold truncate">{c.role}</div>
-                    <div className="text-white/45 text-[9px] truncate">{c.dept}</div>
-                  </div>
-                  <div className="shrink-0 flex flex-col items-end gap-0.5">
-                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-semibold ${statusColor[c.status]}`}>
-                      {c.status}
-                    </span>
-                    <span className="text-[#C89B3C] text-[9px] font-bold">{c.match}%</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Bar chart - hiring trend */}
-            <div className="bg-white/4 border border-white/8 rounded-lg p-2">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[9px] text-white/40 uppercase tracking-widest">Hiring Trend</span>
-                <motion.span key={tick} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] font-bold text-emerald-400">
-                  +24% ↑
-                </motion.span>
-              </div>
-              <div className="flex items-end gap-1 h-8">
-                {bars.map((h, i) => (
-                  <motion.div
-                    key={`${tick}-${i}`}
-                    initial={{ height: "15%" }}
-                    animate={{ height: `${h}%` }}
-                    transition={{ duration: 0.6, delay: i * 0.06, ease: "easeOut" }}
-                    className={`flex-1 rounded-t-sm ${i === 5 ? "bg-[#C89B3C]" : "bg-[#C89B3C]/30"}`}
-                  />
-                ))}
-              </div>
-              <div className="flex justify-between mt-1">
-                {["J","F","M","A","M","J","J"].map((m,i) => (
-                  <span key={i} className="text-[7px] text-white/20 flex-1 text-center">{m}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Pipeline + metrics */}
-          <div className="flex flex-col gap-2 flex-1">
-            {/* Talent Match */}
-            <div className="bg-white/4 border border-white/8 rounded-lg p-2.5">
-              <div className="text-[9px] text-white/35 uppercase tracking-widest mb-2">Talent Match</div>
-              <div className="flex items-center gap-2">
-                <div className="relative w-10 h-10 shrink-0">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 40 40">
-                    <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(200,155,60,0.15)" strokeWidth="3" />
-                    <motion.circle
-                      cx="20" cy="20" r="16"
-                      fill="none" stroke="#C89B3C" strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeDasharray="100.5"
-                      initial={{ strokeDashoffset: 100.5 }}
-                      animate={{ strokeDashoffset: 100.5 * 0.02 }}
-                      transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
-                    />
-                  </svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-[#C89B3C] font-black text-[10px]">98%</span>
+                  {p.initials}
                 </div>
-                <div className="flex-1 space-y-1">
-                  {[80, 65, 50].map((w, i) => (
-                    <motion.div key={i} className="h-1 rounded-full bg-white/10">
-                      <motion.div
-                        className="h-full rounded-full bg-[#C89B3C]/70"
-                        initial={{ width: "0%" }}
-                        animate={{ width: `${w}%` }}
-                        transition={{ duration: 0.8, delay: 0.5 + i * 0.1 }}
-                      />
-                    </motion.div>
-                  ))}
+
+                {/* Role info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-[11px] font-bold truncate">{p.role}</p>
+                  <p className="text-white/40 text-[9px] truncate">{p.industry}</p>
                 </div>
-              </div>
-            </div>
 
-            {/* Pipeline funnel */}
-            <div className="bg-white/4 border border-white/8 rounded-lg p-2.5 flex-1">
-              <div className="text-[9px] text-white/35 uppercase tracking-widest mb-2 flex items-center gap-1">
-                <Briefcase className="w-2.5 h-2.5" /> Pipeline
-              </div>
-              <div className="flex flex-col gap-1.5">
-                {pipeline.map((p, i) => (
-                  <div key={i} className="flex items-center gap-1.5">
-                    <div className="text-[8px] text-white/35 w-14 shrink-0 truncate">{p.label}</div>
-                    <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: p.color }}
-                        initial={{ width: "0%" }}
-                        whileInView={{ width: `${p.pct}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: 0.3 + i * 0.1 }}
-                      />
-                    </div>
-                    <span className="text-[8px] font-bold text-white/50 w-5 text-right">{p.count}</span>
+                {/* Match + check */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <div className="text-right">
+                    <span className="text-[#C89B3C] font-black text-[13px] leading-none">{p.match}%</span>
+                    <p className="text-white/30 text-[8px]">match</p>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
+                    <CheckCircle className="w-3 h-3 text-emerald-400" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
 
-            {/* Open roles badge */}
-            <div className="bg-[#C89B3C]/10 border border-[#C89B3C]/25 rounded-lg p-2 flex items-center justify-between">
-              <div>
-                <div className="text-[9px] text-[#C89B3C]/70 uppercase tracking-widest">Open Roles</div>
-                <div className="text-white font-black text-lg leading-none">12</div>
-              </div>
-              <div className="flex flex-col gap-0.5 text-right">
-                <span className="text-[8px] text-emerald-400">5 Active</span>
-                <span className="text-[8px] text-blue-400">4 Offered</span>
-                <span className="text-[8px] text-white/30">3 Final Rnd</span>
-              </div>
+        {/* Stats bar */}
+        <div className="mt-3 grid grid-cols-4 gap-1.5 shrink-0">
+          {dashStats.map(({ value, label }) => (
+            <div key={label} className="bg-white/5 border border-white/8 rounded-lg py-2 text-center">
+              <p className="text-[#C89B3C] font-black text-[12px] leading-none">{value}</p>
+              <p className="text-white/30 text-[7.5px] mt-0.5">{label}</p>
             </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-2.5 flex items-center gap-2 shrink-0">
+          <div className="flex items-center">
+            {teamDots.map((c, i) => (
+              <div
+                key={i}
+                className="w-5 h-5 rounded-full border-2 border-[#071d42] -ml-1 first:ml-0"
+                style={{ background: c, zIndex: teamDots.length - i }}
+              />
+            ))}
           </div>
+          <p className="text-white/35 text-[9px] font-medium">People. Strategy. Growth.</p>
         </div>
       </div>
     </div>
   );
 }
-
-const trustedLogos = [
-  { name: "PwC", domain: "pwc.com" },
-  { name: "EY", domain: "ey.com" },
-  { name: "Roche", domain: "roche.com" },
-  { name: "Walmart", domain: "walmart.com" },
-  { name: "Sanofi", domain: "sanofi.com" },
-];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
