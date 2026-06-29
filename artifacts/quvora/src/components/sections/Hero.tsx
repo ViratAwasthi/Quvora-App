@@ -1,200 +1,109 @@
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, Briefcase, MapPin, Sparkles, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, ArrowUpRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
-const activeMandates = [
-  {
-    role: "Chief People Officer",
-    sector: "BFSI",
-    city: "Mumbai",
-    stage: "Shortlisting",
-    stageColor: "#C89B3C",
-    insight: "4 candidates advancing to panel interviews",
-    elapsed: "Day 11",
-  },
-  {
-    role: "VP – Engineering",
-    sector: "SaaS",
-    city: "Bengaluru",
-    stage: "Interviews",
-    stageColor: "#0d7cf2",
-    insight: "Final round scheduled with 2 shortlists",
-    elapsed: "Day 8",
-  },
-  {
-    role: "Head of Finance",
-    sector: "Pharma",
-    city: "Hyderabad",
-    stage: "Screening",
-    stageColor: "#10b981",
-    insight: "148 profiles reviewed, 12 progressing",
-    elapsed: "Day 4",
-  },
+const hrMetrics = [
+  { label: "Executive Hiring Demand", value: "+34%", sub: "YoY growth", up: true, color: "#C89B3C" },
+  { label: "Avg. Leadership Fill Time", value: "18 days", sub: "vs. 42d industry avg", up: true, color: "#10b981" },
+  { label: "Offer Acceptance Rate", value: "91%", sub: "Senior leadership roles", up: false, color: "#0d7cf2" },
 ];
 
-const placementWins = [
-  {
-    role: "Chief Digital Officer",
-    orgType: "Leading Private Bank",
-    city: "Mumbai",
-    sector: "BFSI",
-    daysToFill: 14,
-    matchScore: 97,
-    skills: ["Digital Banking", "P&L Leadership", "RBI Compliance"],
-    impact: "Mandated to lead ₹800 Cr digital transformation roadmap",
-    accentColor: "#C89B3C",
-    initials: "CD",
-  },
-  {
-    role: "Head of Engineering",
-    orgType: "Series-C SaaS Startup",
-    city: "Bengaluru",
-    sector: "IT / SaaS",
-    daysToFill: 11,
-    matchScore: 94,
-    skills: ["Platform Engineering", "AI/ML", "Team Scaling"],
-    impact: "Tasked with growing tech team from 40 to 200 in 18 months",
-    accentColor: "#0d7cf2",
-    initials: "HE",
-  },
-  {
-    role: "VP – Human Resources",
-    orgType: "Top Pharma MNC",
-    city: "Hyderabad",
-    sector: "Pharma",
-    daysToFill: 16,
-    matchScore: 98,
-    skills: ["HRBP", "Talent COE", "Org Design"],
-    impact: "Driving people strategy across 3,000+ workforce in India",
-    accentColor: "#10b981",
-    initials: "VP",
-  },
-];
+const sparkBars = [28, 36, 32, 48, 44, 58, 62, 74];
 
-function LiveMandateCard() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % activeMandates.length), 3200);
-    return () => clearInterval(t);
-  }, []);
-  const m = activeMandates[idx];
-  const stages = ["Screening", "Shortlisting", "Interviews", "Offer"];
-  const stageIdx = stages.indexOf(m.stage);
-
+function HRBenchmarkCard() {
   return (
-    <div className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden" style={{ width: 196 }}>
+    <div
+      className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden"
+      style={{ width: 210 }}
+    >
       {/* Header */}
       <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
-        <span className="text-[9px] text-white/40 uppercase tracking-widest font-semibold">Active Search</span>
+        <div>
+          <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">HR Benchmark</span>
+          <span className="text-[9px] text-white/25 ml-1">· India</span>
+        </div>
         <span className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[8px] text-emerald-400">Live</span>
+          <span className="text-[8px] text-white/35">2026</span>
         </span>
       </div>
 
-      {/* Role cycling */}
-      <div className="px-4 pt-3 pb-3" style={{ minHeight: 78 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="text-white font-bold text-[13px] leading-snug mb-1.5">{m.role}</p>
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="inline-flex items-center gap-1 text-[9px] text-white/45">
-                <MapPin className="w-2.5 h-2.5 shrink-0" />{m.city}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
-              <span
-                className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full"
-                style={{ color: m.stageColor, backgroundColor: `${m.stageColor}18` }}
-              >{m.sector}</span>
+      {/* Metrics */}
+      <div className="px-4 pt-3 pb-2 flex flex-col gap-2.5">
+        {hrMetrics.map((m, i) => (
+          <div key={i} className="flex items-center justify-between">
+            <div className="flex-1 min-w-0 mr-2">
+              <p className="text-white/45 text-[9px] leading-tight truncate">{m.label}</p>
             </div>
-          </motion.div>
-        </AnimatePresence>
+            <div className="text-right shrink-0">
+              <span className="font-black text-[13px] leading-none" style={{ color: m.color }}>{m.value}</span>
+              <p className="text-white/25 text-[7.5px] mt-0.5">{m.sub}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Stage bar */}
-      <div className="px-4 pb-3.5">
-        <div className="flex gap-1 mb-2">
-          {stages.map((_, i) => (
-            <div key={i} className="flex-1 h-1 rounded-full transition-colors duration-500"
-              style={{ backgroundColor: i <= stageIdx ? m.stageColor : "rgba(255,255,255,0.1)" }} />
+      {/* Sparkline */}
+      <div className="px-4 pb-3.5 pt-1">
+        <div className="text-[7.5px] text-white/20 uppercase tracking-widest mb-1.5">Hiring trend · 8mo</div>
+        <div className="flex items-end gap-1 h-7">
+          {sparkBars.map((h, i) => (
+            <div
+              key={i}
+              className="flex-1 rounded-sm"
+              style={{
+                height: `${h}%`,
+                backgroundColor: i === sparkBars.length - 1 ? "#C89B3C" : "rgba(200,155,60,0.28)"
+              }}
+            />
           ))}
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-[9px] font-semibold text-white/60">{m.stage}</span>
-          <span className="text-[8px] text-white/30">{m.elapsed}</span>
         </div>
       </div>
     </div>
   );
 }
 
-function PlacementWinCard() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % placementWins.length), 3600);
-    return () => clearInterval(t);
-  }, []);
-  const p = placementWins[idx];
+const demandRows = [
+  { label: "C-Suite / Leadership", pct: 94, color: "#C89B3C" },
+  { label: "Engineering & Tech", pct: 88, color: "#0d7cf2" },
+  { label: "Finance & Risk", pct: 74, color: "#10b981" },
+  { label: "HR / People Ops", pct: 81, color: "#8b5cf6" },
+];
 
+function RoleDemandCard() {
   return (
-    <div className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden" style={{ width: 200 }}>
+    <div
+      className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden"
+      style={{ width: 210 }}
+    >
       {/* Header */}
       <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
-        <span className="text-[9px] text-white/40 uppercase tracking-widest font-semibold">Placement</span>
-        <span className="flex items-center gap-1">
-          <CheckCircle className="w-3 h-3 text-emerald-400" />
-          <span className="text-[8px] text-emerald-400 font-semibold">Placed</span>
-        </span>
+        <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Role Demand Index</span>
+        <ArrowUpRight className="w-3 h-3 text-emerald-400" />
       </div>
 
-      {/* Cycling content */}
-      <div className="px-4 pt-3 pb-3.5" style={{ minHeight: 96 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            transition={{ duration: 0.3 }}
-            className="flex items-start gap-3"
-          >
-            {/* Avatar */}
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0 mt-0.5"
-              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}77)` }}
-            >
-              {p.initials}
+      {/* Bar rows */}
+      <div className="px-4 pt-3 pb-3.5 flex flex-col gap-2.5">
+        {demandRows.map((row, i) => (
+          <div key={i}>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[9px] text-white/50 truncate flex-1 mr-2">{row.label}</span>
+              <span className="text-[9px] font-bold shrink-0" style={{ color: row.color }}>{row.pct}</span>
             </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <p className="text-white font-bold text-[12px] leading-snug truncate">{p.role}</p>
-              <p className="text-white/40 text-[9px] truncate mt-0.5">{p.sector} · {p.city}</p>
-
-              {/* Match score */}
-              <div className="flex items-baseline gap-0.5 mt-2">
-                <span className="font-black text-[22px] leading-none" style={{ color: p.accentColor }}>{p.matchScore}</span>
-                <span className="text-[11px] font-bold" style={{ color: p.accentColor }}>%</span>
-                <span className="text-[9px] text-white/35 ml-1">match</span>
-              </div>
+            <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+              <div
+                className="h-full rounded-full"
+                style={{ width: `${row.pct}%`, backgroundColor: row.color }}
+              />
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-1 pb-3">
-        {placementWins.map((_, i) => (
-          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300"
-            style={{ backgroundColor: i === idx ? p.accentColor : "rgba(255,255,255,0.15)" }} />
+          </div>
         ))}
+      </div>
+
+      {/* Footer label */}
+      <div className="px-4 pb-3 border-t border-white/6 pt-2">
+        <span className="text-[8px] text-white/20 uppercase tracking-widest">Demand score · Q2 2026</span>
       </div>
     </div>
   );
@@ -510,22 +419,22 @@ export default function Hero() {
             >
               <AnimatedDashboard />
 
-              {/* Floating card top-left — Live Mandate */}
+              {/* Floating card top-left — HR Benchmark */}
               <motion.div
-                animate={{ y: [0, -7, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-6 -left-6 z-20"
               >
-                <LiveMandateCard />
+                <HRBenchmarkCard />
               </motion.div>
 
-              {/* Floating card bottom-right — Placement Win */}
+              {/* Floating card bottom-right — Role Demand */}
               <motion.div
-                animate={{ y: [0, 7, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
                 className="absolute -bottom-6 -right-6 z-20"
               >
-                <PlacementWinCard />
+                <RoleDemandCard />
               </motion.div>
             </motion.div>
 
