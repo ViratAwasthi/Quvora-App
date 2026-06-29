@@ -389,29 +389,81 @@ export default function Hero() {
             >
               <AnimatedDashboard />
 
-              {/* Floating badge top-left */}
+              {/* Floating card top-left — Pan-India Reach */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
+                animate={{ y: [0, -7, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -left-4 bg-white rounded-xl shadow-2xl px-4 py-2.5 flex items-center gap-2 z-20 border border-border/30"
+                className="absolute -top-5 -left-5 z-20 rounded-2xl shadow-2xl overflow-hidden"
+                style={{ width: 178 }}
               >
-                <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                <div>
-                  <div className="text-[10px] text-muted-foreground">Placement Rate</div>
-                  <div className="text-base font-black text-[#0A2A5E] leading-tight">98%</div>
+                <div className="bg-[#0A2A5E] border border-white/10 p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <p className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-semibold">Pan-India Reach</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">Active Markets</p>
+                    </div>
+                    <div className="w-7 h-7 rounded-lg bg-[#C89B3C]/15 flex items-center justify-center">
+                      <Briefcase className="w-3.5 h-3.5 text-[#C89B3C]" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    {[
+                      { city: "Mumbai", pct: 88 },
+                      { city: "Bengaluru", pct: 94 },
+                      { city: "Delhi NCR", pct: 76 },
+                    ].map(({ city, pct }) => (
+                      <div key={city} className="flex items-center gap-1.5">
+                        <span className="text-[9px] text-white/50 w-16 shrink-0">{city}</span>
+                        <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full rounded-full bg-[#C89B3C]"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pct}%` }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                          />
+                        </div>
+                        <span className="text-[9px] text-[#C89B3C] font-bold w-5 text-right">{pct}%</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Floating badge bottom-right */}
+              {/* Floating card bottom-right — India Sector Pulse */}
               <motion.div
-                animate={{ y: [0, 8, 0] }}
+                animate={{ y: [0, 7, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-2xl px-4 py-2.5 flex items-center gap-2 z-20 border border-border/30"
+                className="absolute -bottom-5 -right-5 z-20 rounded-2xl shadow-2xl overflow-hidden"
+                style={{ width: 184 }}
               >
-                <TrendingUp className="w-4 h-4 text-[#C89B3C] shrink-0" />
-                <div>
-                  <div className="text-[10px] text-muted-foreground">Avg. Fill Time</div>
-                  <div className="text-base font-black text-[#0A2A5E] leading-tight">18 Days</div>
+                <div className="bg-[#0A2A5E] border border-white/10 p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <p className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-semibold">Sector Pulse</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">Hiring Demand · India</p>
+                    </div>
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+                      <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    {[
+                      { sector: "BFSI", tag: "High", color: "#C89B3C" },
+                      { sector: "IT / SaaS", tag: "Surging", color: "#10b981" },
+                      { sector: "Pharma", tag: "Steady", color: "#0d7cf2" },
+                      { sector: "D2C / Retail", tag: "Growing", color: "#8b5cf6" },
+                    ].map(({ sector, tag, color }) => (
+                      <div key={sector} className="flex items-center justify-between">
+                        <span className="text-[9px] text-white/60">{sector}</span>
+                        <span
+                          className="text-[8px] font-bold px-1.5 py-0.5 rounded-full"
+                          style={{ color, backgroundColor: `${color}20` }}
+                        >
+                          {tag}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
