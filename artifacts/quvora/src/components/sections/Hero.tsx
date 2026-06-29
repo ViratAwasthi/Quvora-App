@@ -75,7 +75,7 @@ const placementWins = [
 function LiveMandateCard() {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % activeMandates.length), 3800);
+    const t = setInterval(() => setIdx(i => (i + 1) % activeMandates.length), 3200);
     return () => clearInterval(t);
   }, []);
   const m = activeMandates[idx];
@@ -83,67 +83,53 @@ function LiveMandateCard() {
   const stageIdx = stages.indexOf(m.stage);
 
   return (
-    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 210 }}>
+    <div className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden" style={{ width: 196 }}>
       {/* Header */}
-      <div className="px-3.5 pt-3 pb-2 border-b border-white/8">
-        <div className="flex items-center justify-between mb-0.5">
-          <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Live Mandate</span>
-          <span className="flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[8px] text-white/35">Active</span>
-          </span>
-        </div>
+      <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
+        <span className="text-[9px] text-white/40 uppercase tracking-widest font-semibold">Active Search</span>
+        <span className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-[8px] text-emerald-400">Live</span>
+        </span>
       </div>
 
-      {/* Cycling role content */}
-      <div className="px-3.5 py-2.5 min-h-[90px]">
+      {/* Role cycling */}
+      <div className="px-4 pt-3 pb-3" style={{ minHeight: 78 }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={idx}
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.35 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ duration: 0.3 }}
           >
-            <p className="text-white font-bold text-[12px] leading-snug mb-1">{m.role}</p>
-            <div className="flex items-center gap-1.5 mb-2">
-              <MapPin className="w-2.5 h-2.5 text-white/35 shrink-0" />
-              <span className="text-[9px] text-white/45">{m.city}</span>
-              <span className="text-white/20 text-[9px]">·</span>
-              <span className="text-[9px] text-white/45">{m.sector}</span>
+            <p className="text-white font-bold text-[13px] leading-snug mb-1.5">{m.role}</p>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="inline-flex items-center gap-1 text-[9px] text-white/45">
+                <MapPin className="w-2.5 h-2.5 shrink-0" />{m.city}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
+              <span
+                className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full"
+                style={{ color: m.stageColor, backgroundColor: `${m.stageColor}18` }}
+              >{m.sector}</span>
             </div>
-            <p className="text-[9px] text-white/50 leading-relaxed italic mb-2.5">"{m.insight}"</p>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Stage pipeline */}
-      <div className="px-3.5 pb-2.5">
-        <div className="flex items-center gap-1 mb-1.5">
-          {stages.map((s, i) => (
-            <div
-              key={s}
-              className="flex-1 h-1 rounded-full transition-all duration-500"
-              style={{ backgroundColor: i <= stageIdx ? m.stageColor : "rgba(255,255,255,0.1)" }}
-            />
+      {/* Stage bar */}
+      <div className="px-4 pb-3.5">
+        <div className="flex gap-1 mb-2">
+          {stages.map((_, i) => (
+            <div key={i} className="flex-1 h-1 rounded-full transition-colors duration-500"
+              style={{ backgroundColor: i <= stageIdx ? m.stageColor : "rgba(255,255,255,0.1)" }} />
           ))}
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full" style={{ color: m.stageColor, backgroundColor: `${m.stageColor}18` }}>
-            {m.stage}
-          </span>
-          <div className="flex items-center gap-1 text-white/30">
-            <Clock className="w-2.5 h-2.5" />
-            <span className="text-[8px]">{m.elapsed}</span>
-          </div>
+          <span className="text-[9px] font-semibold text-white/60">{m.stage}</span>
+          <span className="text-[8px] text-white/30">{m.elapsed}</span>
         </div>
-      </div>
-
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-1 pb-2.5">
-        {activeMandates.map((_, i) => (
-          <div key={i} className="w-1 h-1 rounded-full transition-all duration-300" style={{ backgroundColor: i === idx ? "#C89B3C" : "rgba(255,255,255,0.15)" }} />
-        ))}
       </div>
     </div>
   );
@@ -152,91 +138,59 @@ function LiveMandateCard() {
 function PlacementWinCard() {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % placementWins.length), 4000);
+    const t = setInterval(() => setIdx(i => (i + 1) % placementWins.length), 3600);
     return () => clearInterval(t);
   }, []);
   const p = placementWins[idx];
 
   return (
-    <div className="bg-[#071d42] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" style={{ width: 220 }}>
+    <div className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden" style={{ width: 200 }}>
       {/* Header */}
-      <div className="px-3.5 pt-3 pb-2 border-b border-white/8 flex items-center justify-between">
-        <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">Placement Win</span>
+      <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
+        <span className="text-[9px] text-white/40 uppercase tracking-widest font-semibold">Placement</span>
         <span className="flex items-center gap-1">
           <CheckCircle className="w-3 h-3 text-emerald-400" />
           <span className="text-[8px] text-emerald-400 font-semibold">Placed</span>
         </span>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.35 }}
-        >
-          {/* Role + org */}
-          <div className="px-3.5 pt-2.5 pb-2 flex items-start gap-2.5">
+      {/* Cycling content */}
+      <div className="px-4 pt-3 pb-3.5" style={{ minHeight: 96 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-start gap-3"
+          >
+            {/* Avatar */}
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0"
-              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}88)` }}
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0 mt-0.5"
+              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}77)` }}
             >
               {p.initials}
             </div>
+
+            {/* Info */}
             <div className="flex-1 min-w-0">
-              <p className="text-white font-bold text-[11px] leading-snug truncate">{p.role}</p>
-              <p className="text-white/40 text-[9px] truncate">{p.orgType}</p>
-              <div className="flex items-center gap-1 mt-0.5">
-                <MapPin className="w-2.5 h-2.5 text-white/30 shrink-0" />
-                <span className="text-[8px] text-white/40">{p.city}</span>
-                <span className="text-white/20">·</span>
-                <span
-                  className="text-[8px] font-semibold px-1 py-0.5 rounded-full"
-                  style={{ color: p.accentColor, backgroundColor: `${p.accentColor}18` }}
-                >{p.sector}</span>
+              <p className="text-white font-bold text-[12px] leading-snug truncate">{p.role}</p>
+              <p className="text-white/40 text-[9px] truncate mt-0.5">{p.sector} · {p.city}</p>
+
+              {/* Match score */}
+              <div className="flex items-baseline gap-0.5 mt-2">
+                <span className="font-black text-[22px] leading-none" style={{ color: p.accentColor }}>{p.matchScore}</span>
+                <span className="text-[11px] font-bold" style={{ color: p.accentColor }}>%</span>
+                <span className="text-[9px] text-white/35 ml-1">match</span>
               </div>
             </div>
-          </div>
-
-          {/* Skill tags */}
-          <div className="px-3.5 pb-2 flex flex-wrap gap-1">
-            {p.skills.map(skill => (
-              <span key={skill} className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/8 text-white/55 border border-white/10">
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          {/* Impact line */}
-          <div className="mx-3.5 mb-2.5 px-2.5 py-2 rounded-xl bg-white/5 border border-white/8">
-            <p className="text-[8.5px] text-white/55 leading-relaxed italic">"{p.impact}"</p>
-          </div>
-
-          {/* Stats row */}
-          <div className="px-3.5 pb-3 grid grid-cols-2 gap-2">
-            <div className="bg-white/5 rounded-lg p-2 text-center">
-              <div className="flex items-center justify-center gap-0.5">
-                <Clock className="w-2.5 h-2.5 text-[#C89B3C]" />
-                <span className="text-[#C89B3C] font-black text-[13px]">{p.daysToFill}</span>
-                <span className="text-white/35 text-[8px]">d</span>
-              </div>
-              <p className="text-[7.5px] text-white/30 mt-0.5">Time to Fill</p>
-            </div>
-            <div className="bg-white/5 rounded-lg p-2 text-center">
-              <div className="flex items-center justify-center gap-0.5">
-                <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
-                <span className="text-emerald-400 font-black text-[13px]">{p.matchScore}</span>
-                <span className="text-white/35 text-[8px]">%</span>
-              </div>
-              <p className="text-[7.5px] text-white/30 mt-0.5">Match Score</p>
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-1 pb-2.5">
+      <div className="flex justify-center gap-1 pb-3">
         {placementWins.map((_, i) => (
           <div key={i} className="w-1 h-1 rounded-full transition-all duration-300"
             style={{ backgroundColor: i === idx ? p.accentColor : "rgba(255,255,255,0.15)" }} />

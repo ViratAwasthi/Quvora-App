@@ -24,13 +24,13 @@ const impactStats = [
   { value: "18d", label: "Avg Fill Time", icon: TrendingUp },
 ];
 
-const trustedLogos = [
-  { name: "Tata AIA", domain: "tataaia.com" },
-  { name: "PwC", domain: "pwc.com" },
-  { name: "EY", domain: "ey.com" },
-  { name: "Roche", domain: "roche.com" },
-  { name: "Sanofi", domain: "sanofi.com" },
-  { name: "Walmart", domain: "walmart.com" },
+const industryStrengths = [
+  { label: "BFSI", desc: "Banking, Insurance & NBFCs" },
+  { label: "IT / SaaS", desc: "Product & Engineering" },
+  { label: "Pharma", desc: "Regulated & Life Sciences" },
+  { label: "D2C / Retail", desc: "Consumer & Commerce" },
+  { label: "Manufacturing", desc: "Operations & Supply Chain" },
+  { label: "Consulting", desc: "Strategy & Advisory" },
 ];
 
 function RichIllustration() {
@@ -238,7 +238,7 @@ export default function About() {
               </div>
             </div>
 
-            {/* Trusted logos below methodology */}
+            {/* Industry coverage */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -247,31 +247,20 @@ export default function About() {
               className="pt-2"
             >
               <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mb-4">
-                Talent placed at
+                Industries We Serve
               </p>
-              <div className="flex items-center gap-5 flex-wrap">
-                {trustedLogos.map((logo, i) => (
+              <div className="flex flex-wrap gap-2">
+                {industryStrengths.map((ind, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.5 + i * 0.07 }}
-                    className="h-7 flex items-center"
+                    transition={{ duration: 0.3, delay: 0.5 + i * 0.06 }}
+                    className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 bg-[#F7F8FA] hover:border-[#C89B3C]/40 hover:bg-[#C89B3C]/5 transition-all duration-200 cursor-default"
                   >
-                    <img
-                      src={`https://logo.clearbit.com/${logo.domain}`}
-                      alt={logo.name}
-                      className="h-6 max-w-[72px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-90 transition-all duration-300"
-                      onError={e => {
-                        const el = e.currentTarget;
-                        el.style.display = "none";
-                        const span = document.createElement("span");
-                        span.className = "text-muted-foreground/60 text-xs font-semibold";
-                        span.textContent = logo.name;
-                        el.parentElement?.appendChild(span);
-                      }}
-                    />
+                    <span className="text-xs font-bold text-[#0A2A5E] group-hover:text-[#C89B3C] transition-colors">{ind.label}</span>
+                    <span className="text-[10px] text-muted-foreground hidden sm:block">{ind.desc}</span>
                   </motion.div>
                 ))}
               </div>
