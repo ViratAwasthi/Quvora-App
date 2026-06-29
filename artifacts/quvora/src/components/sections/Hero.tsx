@@ -3,62 +3,44 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown, CheckCircle, TrendingUp, Users, ArrowUpRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
-const hrMetrics = [
-  { label: "Executive Hiring Demand", value: "+34%", sub: "YoY growth", up: true, color: "#C89B3C" },
-  { label: "Avg. Leadership Fill Time", value: "18 days", sub: "vs. 42d industry avg", up: true, color: "#10b981" },
-  { label: "Offer Acceptance Rate", value: "91%", sub: "Senior leadership roles", up: false, color: "#0d7cf2" },
+const quvoraEdge = [
+  { icon: "🎯", text: "Executive search across C-suite, VP & director roles" },
+  { icon: "🏙️", text: "Active in Mumbai, Bengaluru, Delhi NCR & Hyderabad" },
+  { icon: "🤝", text: "Your talent partner from search to successful joining" },
 ];
 
-const sparkBars = [28, 36, 32, 48, 44, 58, 62, 74];
-
-function HRBenchmarkCard() {
+function QuvoraEdgeCard() {
   return (
     <div
       className="bg-[#071d42] border border-white/12 rounded-2xl shadow-2xl overflow-hidden"
-      style={{ width: 210 }}
+      style={{ width: 218 }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 pt-3.5 pb-2.5 border-b border-white/8">
-        <div>
-          <span className="text-[9px] text-[#C89B3C] uppercase tracking-widest font-bold">HR Benchmark</span>
-          <span className="text-[9px] text-white/25 ml-1">· India</span>
+      <div className="px-4 pt-3.5 pb-2.5 border-b border-white/8">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-lg bg-[#C89B3C] flex items-center justify-center shrink-0">
+            <span className="text-white font-black text-[10px]">Q</span>
+          </div>
+          <div>
+            <p className="text-white font-bold text-[11px] leading-none">Quvora Consulting</p>
+            <p className="text-[#C89B3C] text-[8px] tracking-wide mt-0.5">Strategic HR Partner</p>
+          </div>
         </div>
-        <span className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[8px] text-white/35">2026</span>
-        </span>
       </div>
 
-      {/* Metrics */}
-      <div className="px-4 pt-3 pb-2 flex flex-col gap-2.5">
-        {hrMetrics.map((m, i) => (
-          <div key={i} className="flex items-center justify-between">
-            <div className="flex-1 min-w-0 mr-2">
-              <p className="text-white/45 text-[9px] leading-tight truncate">{m.label}</p>
-            </div>
-            <div className="text-right shrink-0">
-              <span className="font-black text-[13px] leading-none" style={{ color: m.color }}>{m.value}</span>
-              <p className="text-white/25 text-[7.5px] mt-0.5">{m.sub}</p>
-            </div>
+      {/* Content bullets */}
+      <div className="px-4 pt-3 pb-3 flex flex-col gap-3">
+        {quvoraEdge.map((item, i) => (
+          <div key={i} className="flex items-start gap-2.5">
+            <span className="text-[13px] shrink-0 mt-0.5 leading-none">{item.icon}</span>
+            <p className="text-white/65 text-[10px] leading-relaxed">{item.text}</p>
           </div>
         ))}
       </div>
 
-      {/* Sparkline */}
-      <div className="px-4 pb-3.5 pt-1">
-        <div className="text-[7.5px] text-white/20 uppercase tracking-widest mb-1.5">Hiring trend · 8mo</div>
-        <div className="flex items-end gap-1 h-7">
-          {sparkBars.map((h, i) => (
-            <div
-              key={i}
-              className="flex-1 rounded-sm"
-              style={{
-                height: `${h}%`,
-                backgroundColor: i === sparkBars.length - 1 ? "#C89B3C" : "rgba(200,155,60,0.28)"
-              }}
-            />
-          ))}
-        </div>
+      {/* Footer */}
+      <div className="mx-4 mb-3.5 px-3 py-2 rounded-xl bg-[#C89B3C]/10 border border-[#C89B3C]/20">
+        <p className="text-[#C89B3C] text-[10px] font-semibold text-center">500+ Leaders Placed Across India</p>
       </div>
     </div>
   );
@@ -126,12 +108,12 @@ const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
 }));
 
 const recentPlacements = [
-  { initials: "VO", role: "VP – Operations", industry: "Banking & Financial Services", match: 96, color: "#C89B3C" },
-  { initials: "CT", role: "Chief Technology Officer", industry: "SaaS / Product Technology", match: 94, color: "#0d7cf2" },
-  { initials: "HC", role: "Head – HR & Culture", industry: "Pharmaceutical Industry", match: 98, color: "#10b981" },
+  { initials: "CP", role: "Chief People Officer", industry: "Banking & Finance · Mumbai", match: 96, color: "#C89B3C" },
+  { initials: "CT", role: "Chief Technology Officer", industry: "IT / SaaS · Bengaluru", match: 94, color: "#0d7cf2" },
+  { initials: "HC", role: "Head – HR & Culture", industry: "Pharma & Life Sciences · Hyderabad", match: 98, color: "#10b981" },
   { initials: "MD", role: "Managing Director", industry: "Investment Banking · Mumbai", match: 97, color: "#8b5cf6" },
-  { initials: "CS", role: "Chief Strategy Officer", industry: "D2C / Consumer Brands", match: 95, color: "#f59e0b" },
-  { initials: "VP", role: "VP – Digital Transformation", industry: "NBFC / Fintech", match: 93, color: "#ec4899" },
+  { initials: "CS", role: "Chief Strategy Officer", industry: "D2C / Consumer Brands · Delhi NCR", match: 95, color: "#f59e0b" },
+  { initials: "VD", role: "VP – Digital", industry: "NBFC / Fintech · Pune", match: 93, color: "#ec4899" },
 ];
 
 const dashStats = [
@@ -145,12 +127,12 @@ const teamDots = ["#C89B3C", "#0d7cf2", "#10b981"];
 
 function AnimatedDashboard() {
   const [visibleStart, setVisibleStart] = useState(0);
-  const VISIBLE = 3;
+  const VISIBLE = 4;
 
   useEffect(() => {
     const t = setInterval(() => {
       setVisibleStart(n => (n + 1) % recentPlacements.length);
-    }, 2600);
+    }, 2400);
     return () => clearInterval(t);
   }, []);
 
@@ -419,13 +401,13 @@ export default function Hero() {
             >
               <AnimatedDashboard />
 
-              {/* Floating card top-left — HR Benchmark */}
+              {/* Floating card top-left — Quvora Edge */}
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-6 -left-6 z-20"
               >
-                <HRBenchmarkCard />
+                <QuvoraEdgeCard />
               </motion.div>
 
               {/* Floating card bottom-right — Role Demand */}
