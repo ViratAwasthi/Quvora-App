@@ -61,10 +61,6 @@ const stories = [
         {[0,1,2].map(i=>(
           <circle key={i} cx={220+i*10} cy={25+i*8} r="1.5" fill="white" fillOpacity="0.4"/>
         ))}
-        {/* Metric overlay */}
-        <rect x="6" y="6" width="70" height="36" rx="6" fill="#C89B3C" fillOpacity="0.15" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1"/>
-        <text x="41" y="22" textAnchor="middle" fontSize="16" fontWeight="900" fill="#C89B3C">90 Days</text>
-        <text x="41" y="35" textAnchor="middle" fontSize="8" fill="white" opacity="0.6">To C-Suite Placed</text>
       </svg>
     ),
     challenge: "The client needed a seasoned CHRO capable of managing a high-growth environment with offices across 5 countries, while simultaneously replacing a VP of Talent amid organizational restructuring.",
@@ -207,7 +203,7 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
     >
       {/* Illustrated header */}
       <div
-        className="h-36 sm:h-44 relative overflow-hidden flex items-end"
+        className="h-36 sm:h-40 relative overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${story.color}, ${story.colorTo})` }}
       >
         {/* Illustration */}
@@ -221,23 +217,24 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
           transition={{ duration: 0.7 }}
         />
 
-        {/* Tag */}
+        {/* Tag — top-left only, no metric overlay */}
         <div className="absolute top-3 left-4 z-10">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/15 text-white border border-white/15">
             <story.Icon size={9} />
             {story.tag}
           </span>
         </div>
+      </div>
 
-        {/* Metric badge */}
-        <div className="absolute bottom-4 right-4 z-10 text-right">
-          <div className="text-3xl font-black text-[#C89B3C] drop-shadow-lg leading-none">
-            <MetricCounter target={parseInt(story.metric)} suffix={story.metricSuffix} active={inView} />
-          </div>
-          <div className="text-xs text-white/60 mt-0.5">{story.metricLabel}</div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/20 to-transparent z-[5]" />
+      {/* Metric strip — clean, dedicated row below illustration */}
+      <div
+        className="flex items-center justify-between px-5 py-3"
+        style={{ background: `linear-gradient(135deg, ${story.color}, ${story.colorTo})` }}
+      >
+        <span className="text-xs text-white/60 font-medium">{story.metricLabel}</span>
+        <span className="text-2xl font-black text-[#C89B3C] leading-none tabular-nums">
+          <MetricCounter target={parseInt(story.metric)} suffix={story.metricSuffix} active={inView} />
+        </span>
       </div>
 
       {/* Body */}
