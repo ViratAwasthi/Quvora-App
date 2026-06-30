@@ -207,7 +207,7 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
     >
       {/* Illustrated header */}
       <div
-        className="h-44 relative overflow-hidden flex items-end"
+        className="h-36 sm:h-44 relative overflow-hidden flex items-end"
         style={{ background: `linear-gradient(135deg, ${story.color}, ${story.colorTo})` }}
       >
         {/* Illustration */}

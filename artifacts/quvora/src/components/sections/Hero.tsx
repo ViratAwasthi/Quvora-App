@@ -87,18 +87,12 @@ export default function Hero() {
               className="text-5xl sm:text-6xl lg:text-[72px] font-bold leading-[1.07] tracking-tight text-white"
             >
               Building{" "}
-              <span className="relative text-[#C89B3C]">
+              <span className="text-[#C89B3C]">
                 Exceptional
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1.1, delay: 0.85, ease: "easeOut" }}
-                  className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-gradient-to-r from-[#C89B3C]/80 via-[#C89B3C]/40 to-transparent origin-left block rounded-full"
-                />
               </span>{" "}
-              Teams.
+              Teams
               <br />
-              <span className="text-white/65 font-semibold">Driving Business Growth.</span>
+              <span className="text-white/65 font-semibold">Driving Business Growth</span>
             </motion.h1>
 
             {/* Divider */}

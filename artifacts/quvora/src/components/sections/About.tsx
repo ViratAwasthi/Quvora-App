@@ -40,7 +40,7 @@ const pillars = [
 
 function BrandVisual() {
   return (
-    <div className="relative w-full h-full flex flex-col overflow-hidden">
+    <div className="relative w-full flex flex-col overflow-hidden">
       {/* Subtle background pattern */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -63,14 +63,14 @@ function BrandVisual() {
         className="absolute -bottom-12 -right-12 w-60 h-60 rounded-full bg-blue-400/20 blur-3xl pointer-events-none"
       />
 
-      <div className="relative z-10 flex flex-col h-full p-8 gap-6">
+      <div className="relative z-10 flex flex-col p-6 sm:p-8 gap-5">
 
         {/* Brand mark */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#C89B3C] flex items-center justify-center shadow-lg shadow-[#C89B3C]/30">
+          <div className="w-10 h-10 rounded-xl bg-[#C89B3C] flex items-center justify-center shadow-lg shadow-[#C89B3C]/30 shrink-0">
             <span className="text-white font-black text-base">Q</span>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-white font-bold text-sm leading-none">Quvora Consulting</p>
             <p className="text-white/35 text-[10px] mt-0.5 tracking-wide">Strategic HR Partner · Since 2015</p>
           </div>
@@ -88,7 +88,7 @@ function BrandVisual() {
         </div>
 
         {/* Pillars */}
-        <div className="flex-1 grid grid-cols-2 gap-3 mt-2">
+        <div className="grid grid-cols-2 gap-3">
           {pillars.map((p, i) => (
             <motion.div
               key={i}
@@ -96,7 +96,7 @@ function BrandVisual() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.2 + i * 0.1 }}
-              className="bg-white/5 border border-white/8 rounded-xl p-3.5 flex flex-col gap-2"
+              className="bg-white/5 border border-white/8 rounded-xl p-3 sm:p-3.5 flex flex-col gap-2"
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
@@ -155,7 +155,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl flex items-stretch"
+            className="relative rounded-3xl overflow-hidden shadow-2xl"
             style={{ background: "linear-gradient(135deg, #071d42 0%, #0a2a5e 50%, #0d2d6b 100%)" }}
           >
             <motion.div

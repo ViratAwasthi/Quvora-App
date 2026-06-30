@@ -1,0 +1,78 @@
+Here's a cleaner, more detailed prompt you can give to Claude, ChatGPT, Cursor, Replit AI, or any coding AI:
+
+---
+
+**Prompt:**
+
+Perform a complete responsive UI/UX optimization for the entire **Quvora Consulting** website. Ensure the website looks professional and functions perfectly on **all screen sizes**, including:
+
+* Mobile phones (320px+)
+* Tablets
+* Laptops
+* Desktop monitors
+* Large 4K displays
+
+### General Responsiveness
+
+* Make every section fully responsive.
+* Eliminate horizontal scrolling on every device.
+* Prevent text, buttons, cards, images, and icons from overlapping.
+* Ensure no content gets cut off or hidden.
+* Maintain consistent spacing, padding, and margins across all breakpoints.
+* Use responsive layouts (Flexbox/Grid), fluid widths, and appropriate media queries.
+* Ensure typography scales smoothly across devices.
+
+### Home Page
+
+* Remove the **yellow underline** located below the **"Exceptional"** heading.
+* Remove all unnecessary **full stops (.)** from section headings throughout the website.
+
+### Who We Are Section
+
+* Make the **Quvora Consulting** information card fully responsive.
+* Ensure:
+
+  * No text is clipped.
+  * No content overlaps.
+  * Card height adjusts automatically.
+  * Proper padding is maintained.
+  * Images and text resize gracefully on all screen sizes.
+
+### Our Recruitment Section
+
+* Remove the **gray horizontal line** appearing in this section.
+* Preserve the existing layout and spacing after removing it.
+
+### HR Intelligence Section
+
+* Make every card fully responsive.
+* Ensure:
+
+  * No text overlaps.
+  * No content is hidden.
+  * Card heights adjust automatically based on content.
+  * Equal spacing between cards.
+  * Responsive layout for mobile, tablet, and desktop.
+
+### Success Stories Section
+
+* Make every testimonial/story card responsive.
+* Ensure:
+
+  * No overlapping text.
+  * No missing content.
+  * Images remain proportional.
+  * Cards resize correctly on every screen width.
+  * Uniform card heights where appropriate.
+
+### Entire Website
+
+* Audit every page and every section for responsiveness.
+* Fix any overflow, alignment, spacing, sizing, or layout issues.
+* Ensure buttons, forms, navigation, images, animations, and interactive elements remain fully functional across all devices.
+* Maintain the existing branding, animations, and visual design while improving responsiveness.
+* Do **not** remove any existing functionality or animations unless necessary to resolve responsiveness issues.
+
+### Final Goal
+
+The website should provide a polished, professional, pixel-perfect experience on every screen size, with **zero content overlap, zero clipping, zero horizontal scrolling, and no missing content** anywhere on the site.

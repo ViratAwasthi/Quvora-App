@@ -22,20 +22,18 @@ export default function Process() {
         </div>
 
         <div className="relative">
-          {/* Desktop Line */}
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-border -translate-y-1/2" />
+          {/* Desktop animated gold line only */}
           <motion.div 
-            className="hidden md:block absolute top-1/2 left-0 h-1 bg-accent -translate-y-1/2 origin-left"
+            className="hidden md:block absolute top-1/2 left-0 h-1 bg-accent -translate-y-1/2 origin-left w-full"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
           />
 
-          {/* Mobile Line */}
-          <div className="md:hidden absolute top-0 bottom-0 left-8 w-1 bg-border" />
+          {/* Mobile animated gold line only */}
           <motion.div 
-            className="md:hidden absolute top-0 left-8 w-1 bg-accent origin-top"
+            className="md:hidden absolute top-0 left-8 w-1 bg-accent origin-top h-full"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}

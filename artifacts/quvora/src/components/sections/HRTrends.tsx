@@ -351,7 +351,7 @@ export default function HRTrends() {
             >
               {/* Visual header with illustration */}
               <div
-                className="h-48 relative overflow-hidden flex items-end"
+                className="h-40 sm:h-48 relative overflow-hidden flex items-end"
                 style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
               >
                 {/* Illustration fills the header */}

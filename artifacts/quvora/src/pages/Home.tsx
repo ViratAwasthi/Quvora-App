@@ -19,7 +19,7 @@ import FloatingButtons from "@/components/FloatingButtons";
 
 export default function Home() {
   return (
-    <div className="w-full font-sans bg-background text-foreground">
+    <div className="w-full font-sans bg-background text-foreground overflow-x-hidden">
       <Navbar />
       
       <main>
