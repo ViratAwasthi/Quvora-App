@@ -93,8 +93,8 @@ const stories = [
         {/* Code brackets & tech elements */}
         <text x="8" y="40" fontSize="28" fontWeight="900" fill="white" opacity="0.08">{"{"}</text>
         <text x="230" y="40" fontSize="28" fontWeight="900" fill="white" opacity="0.08">{"}"}</text>
-        {/* Engineer cards in grid */}
-        {[0,1,2,3,4,5].map(i=>{
+        {/* Engineer cards in grid — 5 cards, leaving space for ring */}
+        {[0,1,2,3,4].map(i=>{
           const row = Math.floor(i/3), col = i%3;
           const x = 40 + col * 62, y = 12 + row * 52;
           const isHighlighted = i < 4;
@@ -102,7 +102,7 @@ const stories = [
             <g key={i}>
               <rect x={x} y={y} width={52} height={40} rx="6" fill="white" fillOpacity={isHighlighted?0.12:0.05} stroke={isHighlighted?"#C89B3C":"white"} strokeOpacity={isHighlighted?0.4:0.1} strokeWidth="1"/>
               <circle cx={x+26} cy={y+14} r="8" fill={isHighlighted?"#C89B3C":"white"} fillOpacity={isHighlighted?0.7:0.1}/>
-              <text x={x+26} y={y+19} textAnchor="middle" fontSize="9" fill={isHighlighted?"white":"white"} opacity={isHighlighted?0.9:0.3}>{["BE","FE","DE","QA","SR","PM"][i]}</text>
+              <text x={x+26} y={y+19} textAnchor="middle" fontSize="9" fill="white" opacity={isHighlighted?0.9:0.3}>{["BE","FE","DE","QA","SR"][i]}</text>
               <rect x={x+8} y={y+27} width={36} height={5} rx="2" fill="white" fillOpacity={isHighlighted?0.3:0.1}/>
             </g>
           );

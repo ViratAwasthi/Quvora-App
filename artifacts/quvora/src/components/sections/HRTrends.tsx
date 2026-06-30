@@ -36,14 +36,6 @@ const trends = [
         ))}
         {/* Center icon */}
         <text x="130" y="70" textAnchor="middle" fontSize="16" fill="#C89B3C" opacity="0.9">🧠</text>
-        {/* Stat card */}
-        <rect x="6" y="6" width="58" height="36" rx="6" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
-        <text x="35" y="22" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#C89B3C">40%</text>
-        <text x="35" y="35" textAnchor="middle" fontSize="7" fill="white" opacity="0.5">Faster Screen</text>
-        {/* Right stat card */}
-        <rect x="196" y="6" width="58" height="36" rx="6" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
-        <text x="225" y="22" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#C89B3C">98%</text>
-        <text x="225" y="35" textAnchor="middle" fontSize="7" fill="white" opacity="0.5">Match Acc.</text>
       </svg>
     ),
     full: `Artificial intelligence has irrevocably changed how organisations source, screen, and shortlist talent. Automated resume parsing, predictive candidate scoring, and AI-driven interview scheduling have compressed what once took weeks into hours.
@@ -98,9 +90,6 @@ The organisations winning the talent war in 2026 aren't choosing between AI and 
         <text x="131" y="117" textAnchor="middle" fontSize="10" fill="white" opacity="0.7">Design</text>
         <rect x="168" y="97" width="68" height="26" rx="13" fill="white" fillOpacity="0.07" stroke="white" strokeOpacity="0.12" strokeWidth="1"/>
         <text x="202" y="114" textAnchor="middle" fontSize="10" fill="white" opacity="0.6">Sales Ops</text>
-        {/* Pool size label */}
-        <rect x="6" y="6" width="48" height="24" rx="4" fill="#C89B3C" fillOpacity="0.9"/>
-        <text x="30" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="white">3–5×</text>
       </svg>
     ),
     full: `For decades, a degree from a recognised institution was the primary filter at the top of the hiring funnel. That paradigm is cracking — rapidly.
@@ -161,9 +150,6 @@ The question is no longer whether to shift to skills-first hiring — it's how f
             <circle cx={cx+14} cy={103} r="8" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1"/>
           </g>
         ))}
-        {/* Boardroom stat */}
-        <rect x="196" y="110" width="58" height="24" rx="5" fill="#C89B3C" fillOpacity="0.2" stroke="#C89B3C" strokeOpacity="0.4" strokeWidth="1"/>
-        <text x="225" y="126" textAnchor="middle" fontSize="10" fontWeight="800" fill="#C89B3C">62% ↑</text>
       </svg>
     ),
     full: `A decade ago, the Chief Human Resources Officer was primarily an administrator — managing payroll, resolving conflicts, running compliance. That role is unrecognisable today.
@@ -351,7 +337,7 @@ export default function HRTrends() {
             >
               {/* Visual header with illustration */}
               <div
-                className="h-40 sm:h-48 relative overflow-hidden flex items-end"
+                className="h-36 sm:h-44 relative overflow-hidden"
                 style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
               >
                 {/* Illustration fills the header */}
@@ -365,22 +351,22 @@ export default function HRTrends() {
                   transition={{ duration: 0.6 }}
                 />
 
-                {/* Tag badge */}
+                {/* Tag badge — top-left only */}
                 <div className="absolute top-4 left-5 z-10">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm border border-white/15">
                     <trend.Icon size={10} />
                     {trend.tag}
                   </span>
                 </div>
+              </div>
 
-                {/* Stat badge top-right */}
-                <div className="absolute top-4 right-5 z-10 bg-[#C89B3C] rounded-lg px-3 py-1.5 shadow-lg">
-                  <div className="text-white font-black text-base leading-none">{trend.stat}</div>
-                  <div className="text-white/70 text-[9px] leading-tight">{trend.statLabel}</div>
-                </div>
-
-                {/* Bottom gradient overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent z-10" />
+              {/* Metric strip — dedicated row, no overlap */}
+              <div
+                className="flex items-center justify-between px-5 py-3"
+                style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
+              >
+                <span className="text-xs text-white/60 font-medium">{trend.statLabel}</span>
+                <span className="text-xl font-black text-[#C89B3C] leading-none tabular-nums">{trend.stat}</span>
               </div>
 
               <div className="p-7 flex flex-col flex-grow">
