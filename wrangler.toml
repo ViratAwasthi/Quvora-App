@@ -1,0 +1,5 @@
+name = "quvora"
+pages_build_output_dir = "artifacts/quvora/dist"
+
+[build]
+command = "pnpm install --no-frozen-lockfile && pnpm --filter @workspace/quvora run build:cf"
