@@ -21,41 +21,68 @@ export default function Process() {
           </h2>
         </div>
 
-        <div className="relative">
-          {/* Desktop animated gold line only */}
-          <motion.div 
-            className="hidden md:block absolute top-1/2 left-0 h-1 bg-accent -translate-y-1/2 origin-left w-full"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          />
-
-          {/* Mobile animated gold line only */}
-          <motion.div 
-            className="md:hidden absolute top-0 left-8 w-1 bg-accent origin-top h-full"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          />
-
-          <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-4 relative z-10">
+        {/* Desktop layout: two-row grid */}
+        <div className="hidden md:block">
+          {/* Row 1: Circles */}
+          <div className="flex justify-between px-4">
             {steps.map((step, index) => (
               <motion.div
                 key={step.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="flex md:flex-col items-center md:text-center gap-6 md:gap-4 flex-1"
+                transition={{ duration: 0.45, delay: index * 0.1 }}
+                className="flex flex-col items-center flex-1"
               >
-                <div className="w-16 h-16 shrink-0 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center text-accent font-bold text-xl relative z-10 group hover:scale-110 transition-transform">
+                <div className="w-16 h-16 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center text-accent font-bold text-xl hover:scale-110 transition-transform cursor-default">
                   {step.id}
                 </div>
-                <div className="md:mt-4 bg-white md:bg-transparent p-4 md:p-0 rounded-lg shadow-sm md:shadow-none border md:border-none border-border w-full md:w-auto">
-                  <h3 className="font-semibold text-primary mb-1">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Light grey connector line */}
+          <div className="mx-12 mt-4 mb-6 h-px bg-border/50" />
+
+          {/* Row 2: Text labels */}
+          <div className="flex justify-between px-4">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.1 + 0.15 }}
+                className="flex-1 text-center px-2"
+              >
+                <h3 className="font-semibold text-primary text-sm mb-1">{step.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile layout: vertical stack with grey connector */}
+        <div className="md:hidden relative">
+          {/* Vertical grey line */}
+          <div className="absolute top-8 bottom-8 left-8 w-px bg-border/50" />
+
+          <div className="flex flex-col gap-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="flex items-center gap-6 relative z-10"
+              >
+                <div className="w-16 h-16 shrink-0 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center text-accent font-bold text-xl">
+                  {step.id}
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-border flex-1">
+                  <h3 className="font-semibold text-primary text-sm mb-1">{step.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>
               </motion.div>
             ))}
