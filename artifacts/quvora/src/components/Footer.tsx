@@ -1,4 +1,4 @@
-import logoPath from "@assets/WhatsApp_Image_2026-06-27_at_10.15.50_PM_1782579392135.jpeg";
+const logoPath = "/logo.jpg";
 import { Linkedin, Instagram, Facebook, Twitter } from "lucide-react";
 
 export default function Footer() {

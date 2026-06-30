@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logoPath from "@assets/WhatsApp_Image_2026-06-27_at_10.15.50_PM_1782579392135.jpeg";
+const logoPath = "/logo.jpg";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [

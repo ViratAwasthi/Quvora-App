@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import logoPath from "@assets/WhatsApp_Image_2026-06-27_at_10.15.50_PM_1782579392135.jpeg";
+const logoPath = "/logo.jpg";
 
 interface LoadingScreenProps {
   onComplete: () => void;
