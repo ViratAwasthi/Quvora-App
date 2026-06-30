@@ -1,5 +1,5 @@
 {
-  "build_command": "pnpm install --frozen-lockfile && pnpm --filter @workspace/quvora run build:cf",
+  "build_command": "pnpm install --no-frozen-lockfile && pnpm --filter @workspace/quvora run build:cf",
   "output_directory": "artifacts/quvora/dist",
   "node_version": "22",
   "note": "Set these values in Cloudflare Pages → Settings → Build & deployments"
