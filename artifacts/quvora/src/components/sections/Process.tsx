@@ -75,9 +75,9 @@ export default function Process() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="flex items-center gap-6 relative z-10"
+                className="flex items-start gap-4 relative z-10"
               >
-                <div className="w-16 h-16 shrink-0 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center text-accent font-bold text-xl">
+                <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center text-accent font-bold text-base md:text-xl">
                   {step.id}
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow-sm border border-border flex-1">

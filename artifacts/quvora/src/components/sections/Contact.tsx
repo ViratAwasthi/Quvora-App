@@ -140,7 +140,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-3 bg-white rounded-2xl shadow-xl border border-border/50 p-8 md:p-10"
+            className="lg:col-span-3 bg-white rounded-2xl shadow-xl border border-border/50 p-5 sm:p-8 md:p-10 mt-8 lg:mt-0"
           >
             <AnimatePresence mode="wait">
               {!isSuccess ? (

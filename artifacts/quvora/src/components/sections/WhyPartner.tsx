@@ -78,7 +78,7 @@ export default function WhyPartner() {
         </div>
 
         <motion.div
-          className="mt-16 bg-gradient-to-br from-primary to-[#0d3575] rounded-2xl p-10 text-white text-center relative overflow-hidden"
+          className="mt-16 bg-gradient-to-br from-primary to-[#0d3575] rounded-2xl p-6 sm:p-10 text-white text-center relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

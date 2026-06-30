@@ -31,17 +31,17 @@ export default function CTA() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center space-y-8"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
             Ready to Build Your <span className="text-accent">Dream Team?</span>
           </h2>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
             Let's discuss your hiring challenges and outline a strategic roadmap to secure the talent that will drive your business forward.
           </p>
           <div className="pt-4">
             <Button 
               size="lg" 
               onClick={() => scrollTo('#contact')}
-              className="bg-accent hover:bg-accent/90 text-white text-lg h-16 px-10 rounded-md shadow-2xl shadow-accent/20 transition-all hover:scale-105"
+              className="bg-accent hover:bg-accent/90 text-white text-base md:text-lg h-12 md:h-16 px-7 md:px-10 rounded-md shadow-2xl shadow-accent/20 transition-all hover:scale-105"
             >
               Book Free Consultation
             </Button>

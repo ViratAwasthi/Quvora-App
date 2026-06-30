@@ -228,7 +228,7 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
 
       {/* Metric strip — gold top border accent, unified with HR Trends */}
       <div
-        className="flex items-center justify-between px-5 py-3 border-t border-[#C89B3C]/30"
+        className="flex flex-wrap items-center justify-between px-5 py-3 border-t border-[#C89B3C]/30 gap-x-2 gap-y-1"
         style={{ background: `linear-gradient(135deg, ${story.color}, ${story.colorTo})` }}
       >
         <span className="text-xs text-white/60 font-medium">{story.metricLabel}</span>

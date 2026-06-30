@@ -249,14 +249,14 @@ function Modal({ trend, onClose }: { trend: typeof trends[0]; onClose: () => voi
     >
       <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <motion.div
-        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto z-10"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto z-10"
         initial={{ opacity: 0, scale: 0.93, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.93, y: 24 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
       >
         <div
-          className="text-white p-8 rounded-t-2xl relative overflow-hidden"
+          className="text-white p-5 sm:p-8 rounded-t-2xl relative overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
         >
           <div className="absolute inset-0 opacity-20">
@@ -273,7 +273,7 @@ function Modal({ trend, onClose }: { trend: typeof trends[0]; onClose: () => voi
             <h2 className="text-xl font-bold leading-snug pr-8">{trend.title}</h2>
           </div>
         </div>
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
           <div className="prose prose-sm max-w-none text-muted-foreground leading-relaxed space-y-4">
             {trend.full.split("\n\n").map((para, i) => {
               if (para.startsWith("**") && para.endsWith("**")) {

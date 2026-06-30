@@ -123,7 +123,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-xl border-t border-border/50 md:hidden"
+            className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl border-t border-border/50 md:hidden max-h-[80vh] overflow-y-auto"
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-1">
               {NAV_LINKS.map((link) => {

@@ -84,7 +84,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl sm:text-6xl lg:text-[72px] font-bold leading-[1.07] tracking-tight text-white"
+              className="text-4xl sm:text-5xl lg:text-[72px] font-bold leading-[1.07] tracking-tight text-white"
             >
               Building{" "}
               <span className="text-[#C89B3C]">
@@ -169,17 +169,17 @@ export default function Hero() {
       {/* ── Stats bar ── */}
       <div className="relative z-10 border-t border-white/8">
         <div className="container mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8">
+          <div className="grid grid-cols-2 md:grid-cols-4 md:divide-x divide-white/8 [&>*:nth-child(-n+2)]:border-b [&>*:nth-child(-n+2)]:border-white/8 md:[&>*:nth-child(-n+2)]:border-b-0 [&>*:nth-child(odd)]:border-r [&>*:nth-child(odd)]:border-white/8 md:[&>*:nth-child(odd)]:border-r-0">
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.65 + i * 0.08 }}
-                className="py-6 px-4 md:px-8 text-center"
+                className="py-5 px-3 md:py-6 md:px-8 text-center"
               >
-                <p className="text-[28px] md:text-[32px] font-black text-[#C89B3C] leading-none">{stat.value}</p>
-                <p className="text-[10px] text-white/30 mt-1.5 font-medium tracking-[0.12em] uppercase">{stat.label}</p>
+                <p className="text-2xl md:text-[28px] lg:text-[32px] font-black text-[#C89B3C] leading-none">{stat.value}</p>
+                <p className="text-[9px] md:text-[10px] text-white/30 mt-1.5 font-medium tracking-[0.12em] uppercase">{stat.label}</p>
               </motion.div>
             ))}
           </div>
