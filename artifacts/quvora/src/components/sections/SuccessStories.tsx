@@ -216,14 +216,6 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[200%]"
           transition={{ duration: 0.7 }}
         />
-
-        {/* Tag — top-left only, no metric overlay */}
-        <div className="absolute top-3 left-4 z-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/15 text-white border border-white/15">
-            <story.Icon size={9} />
-            {story.tag}
-          </span>
-        </div>
       </div>
 
       {/* Metric strip — gold top border accent, unified with HR Trends */}
@@ -239,6 +231,12 @@ function StoryCard({ story, index, onClick }: { story: typeof stories[0]; index:
 
       {/* Body */}
       <div className="p-6 flex flex-col flex-grow">
+        <div className="mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/8 text-primary border border-primary/15">
+            <story.Icon size={9} />
+            {story.tag}
+          </span>
+        </div>
         <div className="flex items-center gap-2 mb-3">
           <Users className="w-3.5 h-3.5 text-[#C89B3C]" />
           <span className="text-xs text-muted-foreground font-medium">{story.industry} · {story.company}</span>

@@ -351,13 +351,6 @@ export default function HRTrends() {
                   transition={{ duration: 0.6 }}
                 />
 
-                {/* Tag badge — top-left only */}
-                <div className="absolute top-4 left-5 z-10">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm border border-white/15">
-                    <trend.Icon size={10} />
-                    {trend.tag}
-                  </span>
-                </div>
               </div>
 
               {/* Metric strip — dedicated row, gold top border accent */}
