@@ -360,9 +360,9 @@ export default function HRTrends() {
                 </div>
               </div>
 
-              {/* Metric strip — dedicated row, no overlap */}
+              {/* Metric strip — dedicated row, gold top border accent */}
               <div
-                className="flex items-center justify-between px-5 py-3"
+                className="flex items-center justify-between px-5 py-3 border-t border-[#C89B3C]/30"
                 style={{ background: `linear-gradient(135deg, ${trend.bgFrom}, ${trend.bgTo})` }}
               >
                 <span className="text-xs text-white/60 font-medium">{trend.statLabel}</span>
